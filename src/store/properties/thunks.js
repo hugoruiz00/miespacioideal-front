@@ -1,13 +1,16 @@
+import { getPropertiesApi } from "../../properties/api/propertiesApi";
+import { setProperties, updateLoading } from "./propertiesSlice";
 
-// export const startLogin = ({email, password}) => {
-//   return async( dispatch ) => {
-//     dispatch( checkingCredentials() );
+export const startGettingProperties = () => {
+  return async( dispatch ) => {
+    dispatch( updateLoading(true) );
 
-//     const result = await loginApi(email, password);
+    const result = await getPropertiesApi();
 
-//     if ( !result.ok ) return dispatch( errorOnAuth( result ) );
+    // if ( !result.ok ) return dispatch( errorOnAuth( result ) );
+    if ( !result.ok ) return;
 
-//     localStorage.setItem('ACCESS_TOKEN', result.token);
-//     dispatch( login( result ));
-//   }
-// }
+    console.log(result.data);
+    dispatch( setProperties( result.data ));
+  }
+}

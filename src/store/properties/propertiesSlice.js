@@ -17,7 +17,8 @@ export const propertiesSlice = createSlice({
       state.loading = action.payload;
     },
     setProperties: (state, action) => {
-      state.properties = action.payload;
+      state.properties = action.payload.data;
+      state.loading = false;
     },
   }
 });

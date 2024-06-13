@@ -29,7 +29,11 @@ export const Navbar = () => {
 
               {/* Settings Dropdown */}
               <div className="hidden sm:flex sm:items-center sm:ml-6">
-                <NavLinkOption className={'mr-3'}>Publica tu anuncio</NavLinkOption> {/**Crear propiedad */}
+                <NavLinkOption
+                  className={'mr-3'}
+                  to={'create'}>
+                  Publica tu anuncio
+                </NavLinkOption> {/**Crear propiedad */}
                 {user && <Dropdown />}
                 {!user && <NavLinkOption>Ingresar</NavLinkOption> }{/**Crear propiedad */}                        
               </div>

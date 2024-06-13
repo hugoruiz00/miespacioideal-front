@@ -1,6 +1,30 @@
-import { FaSearch } from "react-icons/fa";
+import { useEffect } from "react";
+import { FaSearch, FaRegBookmark, FaPhoneAlt  } from "react-icons/fa";
+import { startGettingProperties } from "../store/properties/thunks";
+import { useDispatch, useSelector } from "react-redux";
+import {detailIcons} from '../properties/components/IconsPropertyDetail';
+import { PrimaryButton } from "../components/PrimaryButton";
+
+const getServiceTypeNames = (serviceTypes) => {
+  if(!serviceTypes) return "";
+
+  return serviceTypes.reduce((names, item) => names + item.name, "");                        
+}
+
+const getFirstImage = (images) => {
+  if(!images || images.length == 0) return "";
+
+  return images[0].image_url;
+}
 
 export const Home = () => {
+
+  const dispatch = useDispatch();
+  const {properties} = useSelector(state => state.properties);
+
+  useEffect(() => {
+    dispatch(startGettingProperties());
+  }, [])
   
   return (
     <div className="py-9">
@@ -26,49 +50,50 @@ export const Home = () => {
             </form>
 
             <section className="flex justify-between flex-wrap mt-3">
-              {/* @foreach ($properties as $property)
-                  <div className="w-1/3">
+              {
+                properties.map(property => (                  
+                  <div key={property.id} className="w-1/3">
                       <div className="bg-white shadow-md rounded-md my-2 mx-2">
-                          <img className="rounded-md" src="{{asset('storage/home.jpg')}}" alt="data-{{$loop->iteration}}">
+                          <img className="rounded-md" src={`${import.meta.env.VITE_API_BASE_URL}${getFirstImage(property.images)}`} alt={property.property_type?.name} />
                           <div className="p-3">
-                              @php
-                                  $serviceTypes = "";
-                                  foreach ($property->serviceTypes as $serviceType) {
-                                      $serviceTypes .= $serviceType->name;
-                                  }
-                              @endphp
-                              <p>{{$property->propertyType->name}} en {{$serviceTypes}}</p>
-                              <p className="text-[#5F5F5F]">{{$property->address}}</p>
-                              <p><span className="font-medium">${{$property->price}}</span> {{$property->paymentFrequency->frequency}}</p>
+                              <p>{property.property_type?.name} en {getServiceTypeNames(property.service_types)}</p>
+                              <p className="text-[#5F5F5F]">{property['address']}</p>
+                              <p><span className="font-medium">${property.price}</span> {property.payment_frequency.frequency}</p>
                               <div className="flex flex-wrap items-center">
-                                  @foreach ($property->details as $detail)
-                                      @if ($loop->iteration > 5)
-                                          @break;
-                                      @endif
-                                      <span title="{{$detail->detail}}">
-                                          @svg("icondetails.$detail->icon", 'h-4 w-4')
+                                {
+                                  property.details.slice(0, 5).map(detail => {
+                                    const Icon = detailIcons[detail.icon];
+
+                                    return (<div key={detail.id}>
+                                      <span title={detail.detail}>
+                                        <Icon className='h-4 w-4' />
                                       </span>
                                       <p className="mr-3">
-                                          @if ($detail->datatype==='integer')
-                                              {{$detail->pivot->value}}
-                                          @endif
+                                        { detail.datatype==='integer' && detail.pivot.value }
                                       </p>
-                                  @endforeach
+                                    </div>)
+                                  })
+                                }                                  
                               </div>
-                              <hr className="my-2">
+                              <hr className="my-2" />
                               <div className="flex items-center justify-between">
                                   <button title="Guardar">
-                                      @svg('fa-bookmark', 'h-5 w-5')
+                                      <FaRegBookmark className='h-5 w-5'/>
                                   </button>
-                                  <x-primary-button className="h-7" title="Ver número de contacto">
-                                      @svg('fa-phone', 'h-3 w-3 mr-1')
-                                      Contacto
-                                  </x-primary-button>
+                                  <PrimaryButton
+                                    type={'submit'}
+                                    className="h-7"
+                                    title="Ver número de contacto"
+                                  >
+                                    <FaPhoneAlt  className='h-3 w-3 mr-1' />
+                                    Contacto
+                                  </PrimaryButton>
                               </div>
                           </div>
                       </div>
                   </div>
-              @endforeach */}
+                ))
+              }
             </section>
           </div>
         </div>
