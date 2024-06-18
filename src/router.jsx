@@ -8,6 +8,7 @@ import { UserForm } from "./auth/components/UserForm";
 import { Login } from "./auth/views/Login";
 import { GuestLayout } from "./auth/layout/GuestLayout";
 import { AuthCallback } from "./auth/views/AuthCallback";
+import { PropertyCreate } from "./properties/components/create/PropertyCreate";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,11 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
-      }, 
+      },
+      {
+        path: '/property/create',
+        element: <PropertyCreate />
+      },
       {
         path: '/users',
         element: <Users />

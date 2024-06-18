@@ -82,3 +82,9 @@ export const startGetUser = () => {
 // NOTIFICATION
 // LOADING
 // REACT HOOK FORM
+// MANEJAR SI HAY ERROR AL CARGAR LAS PROPIEDADES EN EL HOME
+// CLICK OUTSIDE PARA EL DROPDOWN DEL HEADER
+// SEPARAR EN COMPONENTES LAS PROPIEDADES EN EL HOME
+
+// ** Continuar con el método create.
+// También sería buena idea crear una clase para retornar las rutas y no estar usando el env.META etc.

@@ -31,7 +31,7 @@ export const Navbar = () => {
               <div className="hidden sm:flex sm:items-center sm:ml-6">
                 <NavLinkOption
                   className={'mr-3'}
-                  to={'create'}>
+                  to={'property/create'}>
                   Publica tu anuncio
                 </NavLinkOption> {/**Crear propiedad */}
                 {user && <Dropdown />}
