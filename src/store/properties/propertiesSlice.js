@@ -5,7 +5,8 @@ const initialState = {
   page: null,
   totalPages: null,
   error: null,
-  loading: true
+  loading: true,
+  currentProperty: null,
 }
 
 export const propertiesSlice = createSlice({
@@ -20,7 +21,13 @@ export const propertiesSlice = createSlice({
       state.properties = action.payload.data;
       state.loading = false;
     },
+    setCurrentProperty: (state, action) => {
+      state.currentProperty = action.payload.data;
+    },
+    setError: (state, action) => {
+      state.error = action.payload.data;
+    },
   }
 });
 
-export const { updateLoading, setProperties } = propertiesSlice.actions;
+export const { updateLoading, setProperties, setCurrentProperty, setError } = propertiesSlice.actions;

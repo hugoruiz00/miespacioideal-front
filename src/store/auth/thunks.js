@@ -78,13 +78,14 @@ export const startGetUser = () => {
 // }
 
 
-// TAILWINDCSS
 // NOTIFICATION
 // LOADING
 // REACT HOOK FORM
 // MANEJAR SI HAY ERROR AL CARGAR LAS PROPIEDADES EN EL HOME
 // CLICK OUTSIDE PARA EL DROPDOWN DEL HEADER
 // SEPARAR EN COMPONENTES LAS PROPIEDADES EN EL HOME
+// PAGINAR DATOS EN EL HOME
+// También sería buena idea crear una clase para retornar las rutas y no estar usando el env.META etc.
 
 // ** Continuar con el método create.
-// También sería buena idea crear una clase para retornar las rutas y no estar usando el env.META etc.
+// En step one crear la funcionalidad en el backend.

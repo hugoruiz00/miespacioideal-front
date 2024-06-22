@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { FaSearch, FaRegBookmark, FaPhoneAlt  } from "react-icons/fa";
-import { startGettingProperties } from "../store/properties/thunks";
+import { startGettingProperties } from "../store/properties/propertiesThunks";
 import { useDispatch, useSelector } from "react-redux";
 import {detailIcons} from '../properties/components/IconsPropertyDetail';
 import { PrimaryButton } from "../components/PrimaryButton";

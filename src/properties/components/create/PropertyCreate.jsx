@@ -6,7 +6,7 @@ import { PropertyCreateStepFour } from './PropertyCreateStepFour';
 
 export const PropertyCreate = () => {
 
-  const currentStep = 'step-two';
+  const currentStep = 'step-one';
 
   const renderStep = () => {
     const steps = {

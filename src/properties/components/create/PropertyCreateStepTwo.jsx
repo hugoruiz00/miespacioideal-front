@@ -86,6 +86,7 @@ export const PropertyCreateStepTwo = () => {
           <p className="text-[#2D2D2D]">Permite que los interesados puedan contactarte</p>
           <div className="flex items-center">
             <TextInput
+              name={'numbers'}
               type={"number"}
               className={'w-full'}
               placeholder={"Ingresa uno o más números de teléfono"}
