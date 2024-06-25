@@ -9,20 +9,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ErrorMessage } from '../../../components/ErrorMessage';
 import { stepOneValidations } from '../../validations/stepOneValidations';
 import { startCreatingProperty } from '../../../store/properties/propertiesThunks';
+import { clearError } from '../../../store/properties/propertiesSlice';
+import { BackendErrorMessage } from '../../../components/BackendErrorMessage';
 
 const schema = stepOneValidations;
 
 export const PropertyCreateStepOne = () => {
 
   const dispatch = useDispatch();
-  const {propertyTypes} = useSelector(state => state.propertyTypes);
+  const {propertyTypes=[]} = useSelector(state => state.propertyTypes);
+  const {error} = useSelector(state => state.properties);
 
   useEffect(() => {
     dispatch(startGettingPropertyTypes());
   }, [])
 
   const {register, watch, handleSubmit, formState: { errors }} = useForm({ resolver: yupResolver(schema)});
-  const watchPropertyType = watch("propertyType", null);
+  const watchPropertyType = watch("propertyTypeId", null);
   
   const onSubmit = (data) => {
     console.log(data);
@@ -47,13 +50,13 @@ export const PropertyCreateStepOne = () => {
                   id={propertyType.id}
                   value={propertyType.id}
                   className="hidden"
-                  {...register('propertyType')}
+                  {...register('propertyTypeId')}
                 />
                 <p>{propertyType.name}</p>
               </label>
             ))}
           </div>
-          {errors.propertyType && <ErrorMessage message={errors.propertyType?.message} className={'mt-2'}/>}
+          {errors.propertyTypeId && <ErrorMessage message={errors.propertyTypeId?.message} className={'mt-2'}/>}
         </div>
         <div className="my-5">
           <p className="text-[#2D2D2D]">¿Qué tipo de anuncio desea realizar?</p>
@@ -90,6 +93,8 @@ export const PropertyCreateStepOne = () => {
           Continuar
         </PrimaryButton>
       </form>
+      {/* [#00a762] */}
+      {error && <BackendErrorMessage errorMessage={error} handleClose={() => dispatch(clearError())}/>}
     </>
   )
 }

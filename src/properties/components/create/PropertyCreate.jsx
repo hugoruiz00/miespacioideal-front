@@ -3,10 +3,11 @@ import { PropertyCreateStepOne } from './PropertyCreateStepOne';
 import { PropertyCreateStepTwo } from './PropertyCreateStepTwo';
 import { PropertyCreateStepThree } from './PropertyCreateStepThree';
 import { PropertyCreateStepFour } from './PropertyCreateStepFour';
+import { useSelector } from 'react-redux';
 
 export const PropertyCreate = () => {
 
-  const currentStep = 'step-one';
+  const {currentStep} = useSelector(state => state.properties);
 
   const renderStep = () => {
     const steps = {

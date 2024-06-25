@@ -7,8 +7,7 @@ export const startGettingProperties = () => {
 
     const result = await getPropertiesApi();
 
-    // if ( !result.ok ) return dispatch( errorOnAuth( result ) );
-    if ( !result.ok ) return;
+    if ( !result.ok ) return dispatch( setError( result.error ) );
 
     console.log(result.data);
     dispatch( setProperties( result.data ));
@@ -22,7 +21,7 @@ export const startCreatingProperty = (data, step) => {
     const result = await createPropertyApi(data, step);
 
     console.log(result);
-    if ( !result.ok ) return dispatch( setError( result ) );
+    if ( !result.ok ) return dispatch( setError( result.error ) );
     // dispatch( login( result ));
   }
 }

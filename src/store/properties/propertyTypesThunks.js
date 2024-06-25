@@ -1,4 +1,5 @@
 import { getPropertyTypesApi } from "../../properties/api/propertiesApi";
+import { setError } from "./propertiesSlice";
 import { setPropertyTypes, updateLoading } from "./propertyTypesSlice";
 
 export const startGettingPropertyTypes = () => {
@@ -7,10 +8,8 @@ export const startGettingPropertyTypes = () => {
 
     const result = await getPropertyTypesApi();
 
-    // if ( !result.ok ) return dispatch( errorOnAuth( result ) );
-    if ( !result.ok ) return;
+    if ( !result.ok ) return dispatch( setError( result.error ) );
 
-    console.log(result.data);
     dispatch( setPropertyTypes( result.data ));
   }
 }

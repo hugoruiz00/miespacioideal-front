@@ -7,6 +7,7 @@ const initialState = {
   error: null,
   loading: true,
   currentProperty: null,
+  currentStep: 'step-one',
 }
 
 export const propertiesSlice = createSlice({
@@ -25,9 +26,12 @@ export const propertiesSlice = createSlice({
       state.currentProperty = action.payload.data;
     },
     setError: (state, action) => {
-      state.error = action.payload.data;
+      state.error = action.payload;
+    },
+    clearError: (state) => {
+      state.error = null;
     },
   }
 });
 
-export const { updateLoading, setProperties, setCurrentProperty, setError } = propertiesSlice.actions;
+export const { updateLoading, setProperties, setCurrentProperty, setError, clearError } = propertiesSlice.actions;
