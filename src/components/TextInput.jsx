@@ -9,7 +9,7 @@ export const TextInput = ({name, register, className, validations = {}, ...props
     <input
       name={name}
       className={getClasses()}
-      {...register(name, validations)}
+      {...(register ? register(name, validations) : {})}
       {...props}
     />
   )
