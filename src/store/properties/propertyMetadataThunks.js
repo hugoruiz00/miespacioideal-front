@@ -2,7 +2,7 @@ import { getContactNumbersByUserApi, getPaymentFrequenciesApi, getPropertyTypesA
 import { setError } from "./propertiesSlice";
 import { setContactNumbers, setPaymentFrequencies, setPropertyTypes, updateLoading } from "./propertyMetadataSlice";
 
-export const startGettingPropertyTypes = () => {
+export const getPropertyTypes = () => {
   return async( dispatch ) => {
     dispatch( updateLoading(true) );
 
@@ -14,7 +14,7 @@ export const startGettingPropertyTypes = () => {
   }
 }
 
-export const startGettingPaymentFrequencies = () => {
+export const getPaymentFrequencies = () => {
   return async( dispatch ) => {
     dispatch( updateLoading(true) );
 
@@ -25,7 +25,7 @@ export const startGettingPaymentFrequencies = () => {
   }
 }
 
-export const startGettingContactNumbers = () => {
+export const getContactNumbers = () => {
   return async( dispatch, getState ) => {
     dispatch( updateLoading(true) );
 

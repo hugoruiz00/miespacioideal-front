@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { FaSearch, FaRegBookmark, FaPhoneAlt  } from "react-icons/fa";
-import { startGettingProperties } from "../store/properties/propertiesThunks";
+import { getProperties } from "../store/properties/propertiesThunks";
 import { useDispatch, useSelector } from "react-redux";
 import {detailIcons} from '../properties/components/IconsPropertyDetail';
 import { PrimaryButton } from "../components/PrimaryButton";
@@ -23,7 +23,7 @@ export const Home = () => {
   const {properties} = useSelector(state => state.properties);
 
   useEffect(() => {
-    dispatch(startGettingProperties());
+    dispatch(getProperties());
   }, [])
   
   return (

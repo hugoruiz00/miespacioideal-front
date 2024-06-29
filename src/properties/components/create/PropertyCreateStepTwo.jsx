@@ -9,8 +9,8 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { stepTwoValidations } from "../../validations/stepTwoValidations";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
-import { startGettingContactNumbers, startGettingPaymentFrequencies } from "../../../store/properties/propertyMetadataThunks";
-import { startCreatingProperty } from "../../../store/properties/propertiesThunks";
+import { getContactNumbers, getPaymentFrequencies } from "../../../store/properties/propertyMetadataThunks";
+import { createProperty } from "../../../store/properties/propertiesThunks";
 
 const schema = stepTwoValidations;
 
@@ -24,11 +24,11 @@ export const PropertyCreateStepTwo = () => {
   const {paymentFrequencies=[], contactNumbers=[]} = useSelector(state => state.propertyMetadata);
 
   useEffect(() => {
-    dispatch(startGettingPaymentFrequencies());
+    dispatch(getPaymentFrequencies());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(startGettingContactNumbers());
+    dispatch(getContactNumbers());
   }, [dispatch]);
 
   const addContactNumber = () => {
@@ -64,7 +64,7 @@ export const PropertyCreateStepTwo = () => {
   const { fields, append, remove } = useFieldArray({control, name: "numbers"});
 
   const onSubmit = (data) => {
-    dispatch(startCreatingProperty(data, 'step-two'));
+    dispatch(createProperty(data, 'step-two'));
   };
 
   return (

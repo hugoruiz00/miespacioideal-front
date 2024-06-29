@@ -3,12 +3,12 @@ import { Checkbox } from '../../../components/Checkbox';
 import { TextInput } from '../../../components/TextInput';
 import { PrimaryButton } from '../../../components/PrimaryButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { startGettingPropertyTypes } from '../../../store/properties/propertyMetadataThunks';
+import { getPropertyTypes } from '../../../store/properties/propertyMetadataThunks';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ErrorMessage } from '../../../components/ErrorMessage';
 import { stepOneValidations } from '../../validations/stepOneValidations';
-import { startCreatingProperty } from '../../../store/properties/propertiesThunks';
+import { createProperty } from '../../../store/properties/propertiesThunks';
 import { clearError } from '../../../store/properties/propertiesSlice';
 import { BackendErrorMessage } from '../../../components/BackendErrorMessage';
 
@@ -21,14 +21,14 @@ export const PropertyCreateStepOne = () => {
   const {error} = useSelector(state => state.properties);
 
   useEffect(() => {
-    dispatch(startGettingPropertyTypes());
+    dispatch(getPropertyTypes());
   }, [])
 
   const {register, watch, handleSubmit, formState: { errors }} = useForm({ resolver: yupResolver(schema)});
   const watchPropertyType = watch("propertyTypeId", null);
   
   const onSubmit = (data) => {
-    dispatch(startCreatingProperty(data, 'step-one'));
+    dispatch(createProperty(data, 'step-one'));
   };
 
   return (

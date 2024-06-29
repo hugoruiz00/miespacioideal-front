@@ -1,7 +1,7 @@
 import { createPropertyApi, getPropertiesApi } from "../../properties/api/propertiesApi";
 import { setError, setProperties, updateLoading } from "./propertiesSlice";
 
-export const startGettingProperties = () => {
+export const getProperties = () => {
   return async( dispatch ) => {
     dispatch( updateLoading(true) );
 
@@ -14,7 +14,7 @@ export const startGettingProperties = () => {
   }
 }
 
-export const startCreatingProperty = (data, step) => {
+export const createProperty = (data, step) => {
   return async( dispatch ) => {
     dispatch( updateLoading(true) );
 

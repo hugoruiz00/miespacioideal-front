@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { startSignup } from '../../store/auth/thunks';
+import { signup } from '../../store/auth/thunks';
 
 export const Signup = () => {
 
@@ -22,7 +22,7 @@ export const Signup = () => {
       password_confirmation: passwordConfirmationRef.current.value
     }
 
-    dispatch(startSignup(payload));
+    dispatch(signup(payload));
   }
 
   return (

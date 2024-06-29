@@ -1,7 +1,7 @@
 import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Navigate, useLocation} from "react-router-dom";
-import { startLoginGoogle } from '../../store/auth/thunks';
+import { loginGoogle } from '../../store/auth/thunks';
 
 export const AuthCallback = () => {
     const location = useLocation();
@@ -9,7 +9,7 @@ export const AuthCallback = () => {
     const {loading, user} = useSelector(state => state.auth);
     
     useEffect(() => {
-        dispatch(startLoginGoogle(location.search));
+        dispatch(loginGoogle(location.search));
     }, []);
     
     if (loading) {

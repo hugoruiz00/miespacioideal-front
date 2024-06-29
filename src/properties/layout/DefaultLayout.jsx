@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { startGetUser } from '../../store/auth/thunks';
+import { getUser } from '../../store/auth/thunks';
 import { Navbar } from '../../components/navbar/Navbar';
 
 export const DefaultLayout = () => {
   const dispatch = useDispatch();
-  const {token, notification} = useSelector(state => state.auth);
+  const {token, notification, user} = useSelector(state => state.auth);
 
   useEffect(() => {
-    dispatch(startGetUser());
+    dispatch(getUser());
   }, []);
 
   if(!token){

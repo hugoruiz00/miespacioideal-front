@@ -11,7 +11,6 @@ export const Dropdown = () => {
 
   const onLogout = (e) => {
     e.preventDefault();
-console.log("testWW");
     dispatch(startLogout());
   }
 

@@ -14,7 +14,7 @@ export const startLogin = ({email, password}) => {
   }
 }
 
-export const startSignup = ({name, email, password, password_confirmation}) => {
+export const signup = ({name, email, password, password_confirmation}) => {
   return async( dispatch ) => {
     dispatch( checkingCredentials() );
 
@@ -48,7 +48,7 @@ export const openLoginGoogle = () => {
   }
 }
 
-export const startLoginGoogle = (query) => {
+export const loginGoogle = (query) => {
   return async( dispatch ) => {
     dispatch( checkingCredentials() );
 
@@ -60,7 +60,7 @@ export const startLoginGoogle = (query) => {
   }
 }
 
-export const startGetUser = () => {
+export const getUser = () => {
   return async( dispatch ) => {
 
     const result = await getUserApi();
@@ -85,7 +85,10 @@ export const startGetUser = () => {
 // CLICK OUTSIDE PARA EL DROPDOWN DEL HEADER
 // SEPARAR EN COMPONENTES LAS PROPIEDADES EN EL HOME
 // PAGINAR DATOS EN EL HOME
+// ENVIAR EL MANEJO DE ERRORES DE LOS API A UN HELPER
+// MANEJAR CONSTANTES PARA LOS STEP
 // También sería buena idea crear una clase para retornar las rutas y no estar usando el env.META etc.
+// En PropertyCreateStepTwo hace 5 renders al inicio, ver si se puede mejorar.
 
 // ** Continuar con el método create.
-// En step one crear la funcionalidad en el backend.
+// En step two enviar el property current id
