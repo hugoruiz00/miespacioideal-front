@@ -3,7 +3,7 @@ import { Checkbox } from '../../../components/Checkbox';
 import { TextInput } from '../../../components/TextInput';
 import { PrimaryButton } from '../../../components/PrimaryButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { startGettingPropertyTypes } from '../../../store/properties/propertyTypesThunks';
+import { startGettingPropertyTypes } from '../../../store/properties/propertyMetadataThunks';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ErrorMessage } from '../../../components/ErrorMessage';
@@ -17,7 +17,7 @@ const schema = stepOneValidations;
 export const PropertyCreateStepOne = () => {
 
   const dispatch = useDispatch();
-  const {propertyTypes=[]} = useSelector(state => state.propertyTypes);
+  const {propertyTypes=[]} = useSelector(state => state.propertyMetadata);
   const {error} = useSelector(state => state.properties);
 
   useEffect(() => {
@@ -28,7 +28,6 @@ export const PropertyCreateStepOne = () => {
   const watchPropertyType = watch("propertyTypeId", null);
   
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(startCreatingProperty(data, 'step-one'));
   };
 

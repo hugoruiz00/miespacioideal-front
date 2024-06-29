@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { TextArea } from "../../../components/TextArea";
 import { TextInput } from "../../../components/TextInput";
 import { SecondaryButton } from "../../../components/SecondaryButton";
@@ -8,6 +8,9 @@ import { ErrorMessage } from "../../../components/ErrorMessage";
 import { useFieldArray, useForm } from "react-hook-form";
 import { stepTwoValidations } from "../../validations/stepTwoValidations";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch, useSelector } from "react-redux";
+import { startGettingContactNumbers, startGettingPaymentFrequencies } from "../../../store/properties/propertyMetadataThunks";
+import { startCreatingProperty } from "../../../store/properties/propertiesThunks";
 
 const schema = stepTwoValidations;
 
@@ -17,17 +20,16 @@ export const PropertyCreateStepTwo = () => {
   const [numberInput, setNumberInput] = useState('');
   const [divNumbersRef] = useClickOutside(setOpen);
 
-  const paymentFrequencies = [
-    {frequency:"Día", id: 1},
-    {frequency:"Mes", id: 2},
-    {frequency:"Año", id: 3},
-  ];
+  const dispatch = useDispatch();
+  const {paymentFrequencies=[], contactNumbers=[]} = useSelector(state => state.propertyMetadata);
 
-  const userNumbers = [
-    {contact_number:"2321312", id: 1},
-    {contact_number:"2342343", id: 2},
-    {contact_number:"5567677", id: 3},
-  ];
+  useEffect(() => {
+    dispatch(startGettingPaymentFrequencies());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(startGettingContactNumbers());
+  }, [dispatch]);
 
   const addContactNumber = () => {
     if(numberInput!=null && numberInput.trim().length == 10){
@@ -62,8 +64,7 @@ export const PropertyCreateStepTwo = () => {
   const { fields, append, remove } = useFieldArray({control, name: "numbers"});
 
   const onSubmit = (data) => {
-    console.log(data);
-    // dispatch(startCreatingProperty(data, 'step-two'));
+    dispatch(startCreatingProperty(data, 'step-two'));
   };
 
   return (
@@ -133,7 +134,7 @@ export const PropertyCreateStepTwo = () => {
           
           <div ref={divNumbersRef} className={`absolute w-full bg-[#ffffff] rounded-lg mt-0.5 ${open ? 'visible' : 'hidden'}`}>
             {
-              userNumbers.map(contactNumber => (
+              contactNumbers.map(contactNumber => (
                 <p
                   key={contactNumber.id}
                   className="block px-2 py-1 border-2 cursor-pointer rounded-md shadow-sm text-[#4F4F4F] hover:bg-[#d4d4d4]"

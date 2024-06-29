@@ -59,3 +59,39 @@ export const getPropertyTypesApi = async () => {
     }
   }
 }
+
+export const getPaymentFrequenciesApi = async () => {
+  try {
+    const res = await axiosClient.get('/payment-frequencies');
+
+    return {
+      ok: true,
+      data: res.data,
+    }
+  } catch (error) {
+    let errorMessage = "Ha ocurrido un error";
+
+    return {
+      ok: false,
+      error: errorMessage,
+    }
+  }
+}
+
+export const getContactNumbersByUserApi = async (userId) => {
+  try {
+    const res = await axiosClient.get(`/contact-numbers/${userId}`);
+
+    return {
+      ok: true,
+      data: res.data,
+    }
+  } catch (error) {
+    let errorMessage = "Ha ocurrido un error";
+
+    return {
+      ok: false,
+      error: errorMessage,
+    }
+  }
+}

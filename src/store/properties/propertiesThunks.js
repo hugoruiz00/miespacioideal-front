@@ -18,6 +18,8 @@ export const startCreatingProperty = (data, step) => {
   return async( dispatch ) => {
     dispatch( updateLoading(true) );
 
+    // const {currentProperty} = getState().properties;
+    data.propertyId = 9;
     const result = await createPropertyApi(data, step);
 
     console.log(result);
