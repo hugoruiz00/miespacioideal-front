@@ -23,7 +23,12 @@ export const propertiesSlice = createSlice({
       state.loading = false;
     },
     setCurrentProperty: (state, action) => {
-      state.currentProperty = action.payload.data;
+      state.currentProperty = action.payload;
+      state.loading = false;
+    },
+    setCurrentStep: (state, action) => {
+      state.currentStep = action.payload;
+      state.loading = false;
     },
     setError: (state, action) => {
       state.error = action.payload;
@@ -34,4 +39,4 @@ export const propertiesSlice = createSlice({
   }
 });
 
-export const { updateLoading, setProperties, setCurrentProperty, setError, clearError } = propertiesSlice.actions;
+export const { updateLoading, setProperties, setCurrentProperty, setCurrentStep, setError, clearError } = propertiesSlice.actions;

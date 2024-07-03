@@ -9,14 +9,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ErrorMessage } from '../../../components/ErrorMessage';
 import { stepOneValidations } from '../../validations/stepOneValidations';
 import { createProperty } from '../../../store/properties/propertiesThunks';
-import { clearError } from '../../../store/properties/propertiesSlice';
+import { clearError, setCurrentStep } from '../../../store/properties/propertiesSlice';
 import { BackendErrorMessage } from '../../../components/BackendErrorMessage';
+import { useNavigate } from 'react-router-dom';
 
 const schema = stepOneValidations;
 
 export const PropertyCreateStepOne = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {propertyTypes=[]} = useSelector(state => state.propertyMetadata);
   const {error} = useSelector(state => state.properties);
 
@@ -27,8 +30,11 @@ export const PropertyCreateStepOne = () => {
   const {register, watch, handleSubmit, formState: { errors }} = useForm({ resolver: yupResolver(schema)});
   const watchPropertyType = watch("propertyTypeId", null);
   
-  const onSubmit = (data) => {
-    dispatch(createProperty(data, 'step-one'));
+  const onSubmit = async (data) => {
+    const property = await dispatch(createProperty(data, 'step-one'));
+    if(property.id){
+      navigate(`/property/step-two/${property.id}`);
+    }
   };
 
   return (
