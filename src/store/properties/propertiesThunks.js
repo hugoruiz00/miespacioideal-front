@@ -36,7 +36,7 @@ export const createProperty = (data, step) => {
 
     const {currentProperty} = getState().properties;
     if(currentProperty){
-      data.propertyId = currentProperty.id;
+      data = addPropertyId(step, data, currentProperty.id);
     }
     const result = await createPropertyApi(data, step);
 
@@ -48,4 +48,14 @@ export const createProperty = (data, step) => {
     dispatch( updateLoading(false) );
     return result.data.data;
   }
+}
+
+const addPropertyId = (step, data, propertyId) => {
+  if(step == 'step-three'){
+    data.append('propertyId', propertyId);
+  }else{
+    data.propertyId = propertyId;
+  }
+
+  return data;
 }
