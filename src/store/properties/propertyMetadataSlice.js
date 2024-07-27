@@ -4,6 +4,7 @@ const initialState = {
   propertyTypes: [],
   paymentFrequencies: [],
   contactNumbers: [],
+  details: [],
   error: null,
   loading: true
 }
@@ -28,7 +29,11 @@ export const propertyMetadataSlice = createSlice({
       state.contactNumbers = action.payload.data;
       state.loading = false;
     },
+    setDetails: (state, action) => {
+      state.details = action.payload.data;
+      state.loading = false;
+    },
   }
 });
 
-export const { updateLoading, setPropertyTypes, setPaymentFrequencies, setContactNumbers } = propertyMetadataSlice.actions;
+export const { updateLoading, setPropertyTypes, setPaymentFrequencies, setContactNumbers, setDetails } = propertyMetadataSlice.actions;

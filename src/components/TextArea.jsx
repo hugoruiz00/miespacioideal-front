@@ -8,7 +8,7 @@ export const TextArea = ({children, name, register, className, validations = {},
   return (
     <textarea
       name={name}
-      {...register(name, validations)}
+      {...(register ? register(name, validations) : {})}
       className={getClasses()}
       {...props}>
         {children}

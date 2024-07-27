@@ -12,6 +12,7 @@ import { Property } from "../properties/components/create/Property";
 import { PropertyCreateStepOne } from "../properties/components/create/PropertyCreateStepOne";
 import { PropertyCreateStepTwo } from "../properties/components/create/PropertyCreateStepTwo";
 import { PropertyCreateStepThree } from "../properties/components/create/PropertyCreateStepThree";
+import { PropertyCreateStepFour } from "../properties/components/create/PropertyCreateStepFour";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
           {
             path: 'step-three/:propertyId',
             element: <PropertyCreateStepThree/>
+          },
+          {
+            path: 'step-four/:propertyId',
+            element: <PropertyCreateStepFour/>
           }
         ],
       },

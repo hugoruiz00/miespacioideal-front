@@ -1,6 +1,6 @@
-import { getContactNumbersByUserApi, getPaymentFrequenciesApi, getPropertyTypesApi } from "../../properties/api/propertiesApi";
+import { getContactNumbersByUserApi, getDetailsApi, getPaymentFrequenciesApi, getPropertyTypesApi } from "../../properties/api/propertiesApi";
 import { setError } from "./propertiesSlice";
-import { setContactNumbers, setPaymentFrequencies, setPropertyTypes, updateLoading } from "./propertyMetadataSlice";
+import { setContactNumbers, setDetails, setPaymentFrequencies, setPropertyTypes, updateLoading } from "./propertyMetadataSlice";
 
 export const getPropertyTypes = () => {
   return async( dispatch ) => {
@@ -35,5 +35,16 @@ export const getContactNumbers = () => {
     if ( !result.ok ) return dispatch( setError( result.error ) );
 
     dispatch( setContactNumbers( result.data ));
+  }
+}
+
+export const getDetails = () => {
+  return async( dispatch ) => {
+    dispatch( updateLoading(true) );
+
+    const result = await getDetailsApi();
+    if ( !result.ok ) return dispatch( setError( result.error ) );
+
+    dispatch( setDetails( result.data ));
   }
 }

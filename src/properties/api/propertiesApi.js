@@ -113,3 +113,21 @@ export const getContactNumbersByUserApi = async (userId) => {
     }
   }
 }
+
+export const getDetailsApi = async () => {
+  try {
+    const res = await axiosClient.get('/details');
+
+    return {
+      ok: true,
+      data: res.data,
+    }
+  } catch (error) {
+    let errorMessage = "Ha ocurrido un error";
+
+    return {
+      ok: false,
+      error: errorMessage,
+    }
+  }
+}

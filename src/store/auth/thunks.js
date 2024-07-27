@@ -89,6 +89,7 @@ export const getUser = () => {
 // MANEJAR CONSTANTES PARA LOS STEP
 // También sería buena idea crear una clase para retornar las rutas y no estar usando el env.META etc.
 // En PropertyCreateStepTwo hace 5 renders al inicio, ver si se puede mejorar.
-
-// ** Continuar con el método create.
-// En step two enviar el property current id
+// En el backend ver la ruta en que se guardan las imágenes porque ahorita está hardcodeado la ruta.
+// Ver mensajes de error y que estén en español en los steps
+// Responsivo
+// Vista de progreso lateral de steps
