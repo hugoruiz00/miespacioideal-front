@@ -9,7 +9,7 @@ import { TextInput } from "../../../components/TextInput";
 import { useFieldArray, useForm } from "react-hook-form";
 import { modalStepFourValidations } from "../../validations/modalStepFourValidation";
 import { useDispatch, useSelector } from "react-redux";
-import { createProperty } from "../../../store/properties/propertiesThunks";
+import { createOwnerProperty } from "../../../store/properties/propertiesThunks";
 import { getDetails } from "../../../store/properties/propertyMetadataThunks";
 import { ErrorMessage } from "../../../components/ErrorMessage";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -50,7 +50,7 @@ export const PropertyCreateStepFour = () => {
     });
     delete data.details;
 
-    const property = await dispatch(createProperty(data, 'step-four'));
+    const property = await dispatch(createOwnerProperty(data, 'step-four'));
     console.log(property);
     // if(property.id){
     // TODO 

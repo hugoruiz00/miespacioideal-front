@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ErrorMessage } from '../../../components/ErrorMessage';
 import { stepOneValidations } from '../../validations/stepOneValidations';
-import { createProperty } from '../../../store/properties/propertiesThunks';
+import { createOwnerProperty } from '../../../store/properties/propertiesThunks';
 import { clearError, setCurrentStep } from '../../../store/properties/propertiesSlice';
 import { BackendErrorMessage } from '../../../components/BackendErrorMessage';
 import { useNavigate } from 'react-router-dom';
@@ -31,7 +31,7 @@ export const PropertyCreateStepOne = () => {
   const watchPropertyType = watch("propertyTypeId", null);
   
   const onSubmit = async (data) => {
-    const property = await dispatch(createProperty(data, 'step-one'));
+    const property = await dispatch(createOwnerProperty(data, 'step-one'));
     if(property.id){
       navigate(`/property/step-two/${property.id}`);
     }

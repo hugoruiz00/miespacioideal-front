@@ -10,7 +10,7 @@ import { stepTwoValidations } from "../../validations/stepTwoValidations";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
 import { getContactNumbers, getPaymentFrequencies } from "../../../store/properties/propertyMetadataThunks";
-import { createProperty } from "../../../store/properties/propertiesThunks";
+import { createOwnerProperty } from "../../../store/properties/propertiesThunks";
 import { BackendErrorMessage } from "../../../components/BackendErrorMessage";
 import { clearError } from "../../../store/properties/propertiesSlice";
 import { useNavigate } from "react-router-dom";
@@ -70,7 +70,7 @@ export const PropertyCreateStepTwo = () => {
   const { fields, append, remove } = useFieldArray({control, name: "numbers"});
 
   const onSubmit = async (data) => {
-    const property = await dispatch(createProperty(data, 'step-two'));
+    const property = await dispatch(createOwnerProperty(data, 'step-two'));
     if(property.id){
       navigate(`/property/step-three/${property.id}`);
     }

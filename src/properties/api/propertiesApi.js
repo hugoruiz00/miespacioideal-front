@@ -18,9 +18,27 @@ export const getPropertiesApi = async () => {
   }
 }
 
-export const getPropertyApi = async (propertyId) => {
+export const getOwnerPropertiesApi = async () => {
   try {
-    const res = await axiosClient.get(`/properties/${propertyId}`);
+    const res = await axiosClient.get('/owner/properties');
+
+    return {
+      ok: true,
+      data: res.data,
+    }
+  } catch (error) {
+    let errorMessage = "Ha ocurrido un error";
+
+    return {
+      ok: false,
+      error: errorMessage,
+    }
+  }
+}
+
+export const getOwnerPropertyApi = async (propertyId) => {
+  try {
+    const res = await axiosClient.get(`/owner/properties/${propertyId}`);
 
     return {
       ok: true,
@@ -36,9 +54,9 @@ export const getPropertyApi = async (propertyId) => {
   }
 }
 
-export const createPropertyApi = async (data, step) => {
+export const createOwnerPropertyApi = async (data, step) => {
   try {
-    const res = await axiosClient.post(`/properties/create/${step}`, data);
+    const res = await axiosClient.post(`/owner/properties/create/${step}`, data);
 
     return {
       ok: true,
@@ -59,6 +77,23 @@ export const createPropertyApi = async (data, step) => {
   }
 }
 
+export const getContactNumbersByUserApi = async (userId) => {
+  try {
+    const res = await axiosClient.get(`/owner/contact-numbers/${userId}`);
+
+    return {
+      ok: true,
+      data: res.data,
+    }
+  } catch (error) {
+    let errorMessage = "Ha ocurrido un error";
+
+    return {
+      ok: false,
+      error: errorMessage,
+    }
+  }
+}
 
 export const getPropertyTypesApi = async () => {
   try {
@@ -81,24 +116,6 @@ export const getPropertyTypesApi = async () => {
 export const getPaymentFrequenciesApi = async () => {
   try {
     const res = await axiosClient.get('/payment-frequencies');
-
-    return {
-      ok: true,
-      data: res.data,
-    }
-  } catch (error) {
-    let errorMessage = "Ha ocurrido un error";
-
-    return {
-      ok: false,
-      error: errorMessage,
-    }
-  }
-}
-
-export const getContactNumbersByUserApi = async (userId) => {
-  try {
-    const res = await axiosClient.get(`/contact-numbers/${userId}`);
 
     return {
       ok: true,

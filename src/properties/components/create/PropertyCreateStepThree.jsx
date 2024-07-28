@@ -4,7 +4,7 @@ import { FaTimesCircle } from "react-icons/fa";
 import { validateImage, validateListImages } from "../../validations/stepThreeValidations";
 import { ErrorMessage } from "../../../components/ErrorMessage";
 import { useDispatch, useSelector } from "react-redux";
-import { createProperty } from "../../../store/properties/propertiesThunks";
+import { createOwnerProperty } from "../../../store/properties/propertiesThunks";
 import { BackendErrorMessage } from "../../../components/BackendErrorMessage";
 import { clearError } from "../../../store/properties/propertiesSlice";
 
@@ -31,7 +31,7 @@ export const PropertyCreateStepThree = () => {
       formData.append('images[]', image);
     });
 
-    const property = await dispatch(createProperty(formData, 'step-three'));
+    const property = await dispatch(createOwnerProperty(formData, 'step-three'));
     // if(property.id){
     //   navigate(`/property/step-four/${property.id}`);
     // }

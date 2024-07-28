@@ -1,4 +1,4 @@
-import { createPropertyApi, getPropertiesApi, getPropertyApi } from "../../properties/api/propertiesApi";
+import { createOwnerPropertyApi, getPropertiesApi, getOwnerPropertyApi } from "../../properties/api/propertiesApi";
 import { setCurrentProperty, setCurrentStep, setError, setProperties, updateLoading } from "./propertiesSlice";
 
 export const getProperties = () => {
@@ -14,11 +14,11 @@ export const getProperties = () => {
   }
 }
 
-export const getProperty = (propertyId) => {
+export const getOwnerProperty = (propertyId) => {
   return async( dispatch ) => {
     dispatch( updateLoading(true) );
 
-    const result = await getPropertyApi(propertyId);
+    const result = await getOwnerPropertyApi(propertyId);
 
     if ( !result.ok ){
       dispatch( setError( result.error ) );
@@ -30,7 +30,7 @@ export const getProperty = (propertyId) => {
   }
 }
 
-export const createProperty = (data, step) => {
+export const createOwnerProperty = (data, step) => {
   return async( dispatch, getState ) => {
     dispatch( updateLoading(true) );
 
@@ -38,7 +38,7 @@ export const createProperty = (data, step) => {
     if(currentProperty){
       data = addPropertyId(step, data, currentProperty.id);
     }
-    const result = await createPropertyApi(data, step);
+    const result = await createOwnerPropertyApi(data, step);
 
     if ( !result.ok ) {
       dispatch( setError( result.error ) );

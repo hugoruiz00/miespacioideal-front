@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import { getProperty } from '../../../store/properties/propertiesThunks';
+import { getOwnerProperty } from '../../../store/properties/propertiesThunks';
 
 export const Property = () => {
 
@@ -13,7 +13,7 @@ export const Property = () => {
     if(!params.propertyId) return;
 
     const fetchProperty = async () => {
-      const res = await dispatch(getProperty(params.propertyId));
+      const res = await dispatch(getOwnerProperty(params.propertyId));
       if(!res){
         navigate(`/property/step-one`);
       }
