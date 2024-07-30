@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { DropdownLink } from './DropdownLink';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../store/auth/thunks';
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 export const Dropdown = () => {
 
@@ -9,14 +10,15 @@ export const Dropdown = () => {
   const {user} = useSelector(state => state.auth);
   const [open, setOpen] = useState(false);
 
+  const [divDropdownRef] = useClickOutside(setOpen);
+
   const onLogout = (e) => {
     e.preventDefault();
     dispatch(startLogout());
   }
 
   return (
-    // @click.outside="open = false" @close.stop="open = false"
-    <div className="relative">
+    <div className="relative" ref={divDropdownRef}>
         <div onClick={() => setOpen(!open) }>
           <button className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
               <div>{user.name}</div>
@@ -34,7 +36,7 @@ export const Dropdown = () => {
             className="absolute z-50 mt-2 w-48 rounded-md shadow-lg origin-top-right right-0"
             onClick={() => setOpen(false) }>
             <div className="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white">          
-              <DropdownLink text={'Perfil'}/>{/**Ir a editar perfil */}
+              {/* <DropdownLink text={'Perfil'}/>{/**Ir a editar perfil */}
               <DropdownLink text={'Cerrar sesión'} onClick={onLogout}/>
               </div>
           </div>

@@ -9,7 +9,7 @@ export const getPropertiesApi = async () => {
       data: res.data,
     }
   } catch (error) {
-    let errorMessage = "Ha ocurrido un error";
+    let errorMessage = "Ha ocurrido un error al consultar";
 
     return {
       ok: false,

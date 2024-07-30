@@ -4,6 +4,8 @@ import { getProperties } from "../store/properties/propertiesThunks";
 import { useDispatch, useSelector } from "react-redux";
 import {detailIcons} from '../properties/components/IconsPropertyDetail';
 import { PrimaryButton } from "../components/PrimaryButton";
+import { BackendErrorMessage } from "../components/BackendErrorMessage";
+import { clearError } from "../store/properties/propertiesSlice";
 
 const getServiceTypeNames = (serviceTypes) => {
   if(!serviceTypes) return "";
@@ -20,7 +22,7 @@ const getFirstImage = (images) => {
 export const Home = () => {
 
   const dispatch = useDispatch();
-  const {properties} = useSelector(state => state.properties);
+  const {properties, error} = useSelector(state => state.properties);
 
   useEffect(() => {
     dispatch(getProperties());
@@ -58,20 +60,22 @@ export const Home = () => {
                           <div className="p-3">
                               <p>{property.property_type?.name} en {getServiceTypeNames(property.service_types)}</p>
                               <p className="text-[#5F5F5F]">{property['address']}</p>
-                              <p><span className="font-medium">${property.price}</span> {property.payment_frequency.frequency}</p>
+                              <p><span className="font-medium">${property.price}</span> {property.payment_frequency?.frequency}</p>
                               <div className="flex flex-wrap items-center">
                                 {
                                   property.details.slice(0, 5).map(detail => {
                                     const Icon = detailIcons[detail.icon];
 
-                                    return (<div key={detail.id}>
-                                      <span title={detail.detail}>
-                                        <Icon className='h-4 w-4' />
-                                      </span>
-                                      <p className="mr-3">
-                                        { detail.datatype==='integer' && detail.pivot.value }
-                                      </p>
-                                    </div>)
+                                    return (
+                                      <div key={detail.id} className="flex items-center">
+                                        <span title={detail.detail}>
+                                          <Icon className='h-4 w-4' />
+                                        </span>
+                                        <p className="mr-3 text-gray-800">
+                                          { detail.datatype==='integer' && detail.pivot.value }
+                                        </p>
+                                      </div>
+                                    )
                                   })
                                 }                                  
                               </div>
@@ -98,6 +102,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
+      {error && <BackendErrorMessage errorMessage={error} handleClose={() => dispatch(clearError())}/>}
     </div>
   )
 }
