@@ -6,6 +6,7 @@ import {detailIcons} from '../properties/components/IconsPropertyDetail';
 import { PrimaryButton } from "../components/PrimaryButton";
 import { BackendErrorMessage } from "../components/BackendErrorMessage";
 import { clearError } from "../store/properties/propertiesSlice";
+import { TbHomeSearch } from "react-icons/tb";
 
 const getServiceTypeNames = (serviceTypes) => {
   if(!serviceTypes) return "";
@@ -50,6 +51,14 @@ export const Home = () => {
               </div>  
               <button type="submit" className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-[#FF5C00] rounded-lg border hover:bg-[#CF4D04]">Buscar</button>
             </form>
+
+            { properties.length == 0 &&
+              <div className="text-center justify-center text-gray-500 font-medium mt-12">
+                <p className="text-xl">No se han encontrado propiedades</p>
+                <TbHomeSearch className="mx-auto size-28 my-7 mb-2"/>
+                <p className="text-lg">Parece que no hay propiedades disponibles</p>
+              </div>
+            }
 
             <section className="flex justify-between flex-wrap mt-3">
               {

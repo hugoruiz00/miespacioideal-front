@@ -7,10 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { createOwnerProperty } from "../../../store/properties/propertiesThunks";
 import { BackendErrorMessage } from "../../../components/BackendErrorMessage";
 import { clearError } from "../../../store/properties/propertiesSlice";
+import { useNavigate } from "react-router-dom";
 
 export const PropertyCreateStepThree = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const fileInputRef = useRef();
   const [selectedImages, setSelectedImages] = useState([]);
   const [errorImages, setErrorImages] = useState(null);
@@ -32,9 +34,9 @@ export const PropertyCreateStepThree = () => {
     });
 
     const property = await dispatch(createOwnerProperty(formData, 'step-three'));
-    // if(property.id){
-    //   navigate(`/property/step-four/${property.id}`);
-    // }
+    if(property.id){
+      navigate(`/property/step-four/${property.id}`);
+    }
   }
 
   const handleImageChange = (e) => {
