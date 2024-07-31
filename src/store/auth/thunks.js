@@ -78,18 +78,14 @@ export const getUser = () => {
 // }
 
 
-// NOTIFICATION
 // LOADING
-// REACT HOOK FORM
-// MANEJAR SI HAY ERROR AL CARGAR LAS PROPIEDADES EN EL HOME
-// CLICK OUTSIDE PARA EL DROPDOWN DEL HEADER
-// SEPARAR EN COMPONENTES LAS PROPIEDADES EN EL HOME
+// CLICK OUTSIDE PARA EL DROPDOWN DEL HEADER EN MOBILE
+//* SEPARAR EN COMPONENTES LAS PROPIEDADES EN EL HOME
+//* ENVIAR EL MANEJO DE ERRORES DE LOS API A UN HELPER
 // PAGINAR DATOS EN EL HOME
-// ENVIAR EL MANEJO DE ERRORES DE LOS API A UN HELPER
 // MANEJAR CONSTANTES PARA LOS STEP
-// También sería buena idea crear una clase para retornar las rutas y no estar usando el env.META etc.
-// En PropertyCreateStepTwo hace 5 renders al inicio, ver si se puede mejorar.
-// En el backend ver la ruta en que se guardan las imágenes porque ahorita está hardcodeado la ruta.
+// ocultar periodicidad cuando es solo venta
 // Ver mensajes de error y que estén en español en los steps
 // Responsivo
 // Vista de progreso lateral de steps
+// validaciones y restricciones de roles.
