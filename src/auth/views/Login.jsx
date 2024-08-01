@@ -4,12 +4,13 @@ import { openLoginGoogle, startLogin } from '../../store/auth/thunks';
 import { FaCheck } from "react-icons/fa";
 import Logo from '../../assets/svg/logo.svg';
 import Google from '../../assets/svg/google.svg';
+import { Loading } from '../../components/Loading';
 
 export const Login = () => {
 
   const dispatch = useDispatch();
   
-  const {error, loading} = useSelector(state => state.auth);
+  const {loading} = useSelector(state => state.auth);
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -55,11 +56,13 @@ export const Login = () => {
           </p>
           <div>
             <button
+              disabled={loading}
               onClick={() => dispatch(openLoginGoogle())}
               className="h-14 my-5 font-bold shadow-lg shadow-[#8b8b8b] inline-flex items-center px-4 py-2 bg-[#FFFFFF] border border-transparent rounded-md text-xs text--[#616161] uppercase tracking-widest hover:bg-[#dfdfdf] active:bg-[#dfdfdf] focus:outline-none ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150"
             >
               <img src={Google} width={25}/>
               <span className='ml-3'>Ingresa con tu cuenta de Google</span>
+              {loading && <Loading className={'h-6 w-6 ml-2'}/>}
             </button>
           </div>
         </div>

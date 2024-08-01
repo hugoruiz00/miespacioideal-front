@@ -7,7 +7,7 @@ const initialState = {
   token,
   notification: '',
   error: null,
-  loading: true
+  loading: false
 }
 
 export const authSlice = createSlice({
@@ -36,8 +36,11 @@ export const authSlice = createSlice({
       state.loading = false;
       state.user = null;
       state.token = null;
+    },
+    clearError: (state, action) => {
+      state.error = null;
     }
   }
 });
 
-export const { login, setUser, logout, checkingCredentials, errorOnAuth } = authSlice.actions;
+export const { login, setUser, logout, checkingCredentials, errorOnAuth, clearError } = authSlice.actions;
