@@ -12,6 +12,7 @@ import { createOwnerProperty } from '../../../store/properties/propertiesThunks'
 import { clearError, setCurrentStep } from '../../../store/properties/propertiesSlice';
 import { BackendErrorMessage } from '../../../components/BackendErrorMessage';
 import { useNavigate } from 'react-router-dom';
+import { Loading } from '../../../components/Loading';
 
 const schema = stepOneValidations;
 
@@ -21,7 +22,7 @@ export const PropertyCreateStepOne = () => {
   const navigate = useNavigate();
 
   const {propertyTypes=[]} = useSelector(state => state.propertyMetadata);
-  const {error} = useSelector(state => state.properties);
+  const {loading, error} = useSelector(state => state.properties);
 
   useEffect(() => {
     dispatch(getPropertyTypes());
@@ -94,8 +95,9 @@ export const PropertyCreateStepOne = () => {
             placeholder={"Ingresa una dirección"} />
           {errors.address && <ErrorMessage message={errors.address?.message} className={'mt-2'}/>}
         </div>
-        <PrimaryButton className={'mt-5'} type={'submit'}>
+        <PrimaryButton className={'mt-5'} type={'submit'} disabled={loading}>
           Continuar
+          { loading && <Loading className={'size-4 ml-2'}/> }
         </PrimaryButton>
       </form>
       {/* [#00a762] */}

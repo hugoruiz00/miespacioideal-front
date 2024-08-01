@@ -15,6 +15,7 @@ import { ErrorMessage } from "../../../components/ErrorMessage";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { BackendErrorMessage } from "../../../components/BackendErrorMessage";
 import { clearError } from "../../../store/properties/propertiesSlice";
+import { Loading } from "../../../components/Loading";
 
 const modalSchema = modalStepFourValidations;
 
@@ -26,7 +27,7 @@ export const PropertyCreateStepFour = () => {
   const [searchText, setSearchText] = useState('');
 
   const {details=[]} = useSelector(state => state.propertyMetadata);
-  const {error} = useSelector(state => state.properties);
+  const {loading, error} = useSelector(state => state.properties);
 
   const { handleSubmit, control } = useForm();
   const { fields, append, update, remove } = useFieldArray({control, name: "details"});
@@ -188,8 +189,9 @@ export const PropertyCreateStepFour = () => {
             })}
           </div>
         </div>
-        <PrimaryButton className={'mt-5'} type="submit">
+        <PrimaryButton className={'mt-5'} type="submit" disabled={loading}>
           Publicar propiedad
+          { loading && <Loading className={'size-4 ml-2'}/> }
         </PrimaryButton>
       </form>
 

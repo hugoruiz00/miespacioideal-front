@@ -8,6 +8,7 @@ import { createOwnerProperty } from "../../../store/properties/propertiesThunks"
 import { BackendErrorMessage } from "../../../components/BackendErrorMessage";
 import { clearError } from "../../../store/properties/propertiesSlice";
 import { useNavigate } from "react-router-dom";
+import { Loading } from "../../../components/Loading";
 
 export const PropertyCreateStepThree = () => {
 
@@ -16,7 +17,7 @@ export const PropertyCreateStepThree = () => {
   const fileInputRef = useRef();
   const [selectedImages, setSelectedImages] = useState([]);
   const [errorImages, setErrorImages] = useState(null);
-  const {error} = useSelector(state => state.properties);
+  const {loading, error} = useSelector(state => state.properties);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -91,8 +92,9 @@ export const PropertyCreateStepThree = () => {
           ))}
         </div>
         
-        <PrimaryButton className="mt-5" type="submit">
+        <PrimaryButton className="mt-5" type="submit" disabled={loading}>
           Continuar
+          { loading && <Loading className={'size-4 ml-2'}/> }
         </PrimaryButton>
       </form>
       <div>

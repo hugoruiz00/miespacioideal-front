@@ -7,6 +7,8 @@ import { PrimaryButton } from "../components/PrimaryButton";
 import { BackendErrorMessage } from "../components/BackendErrorMessage";
 import { clearError } from "../store/properties/propertiesSlice";
 import { TbHomeSearch } from "react-icons/tb";
+import { Loading } from '../components/Loading';
+import { LoadingCenter } from "../components/LoadingCenter";
 
 const getServiceTypeNames = (serviceTypes) => {
   if(!serviceTypes) return "";
@@ -23,11 +25,15 @@ const getFirstImage = (images) => {
 export const Home = () => {
 
   const dispatch = useDispatch();
-  const {properties, error} = useSelector(state => state.properties);
+  const {properties, loading, error} = useSelector(state => state.properties);
 
   useEffect(() => {
     dispatch(getProperties());
   }, [])
+
+  if(loading){
+    return <LoadingCenter loadingClass="h-10 w-10" />
+  }
   
   return (
     <div className="py-9">

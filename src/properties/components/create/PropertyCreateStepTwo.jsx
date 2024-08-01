@@ -14,6 +14,7 @@ import { createOwnerProperty } from "../../../store/properties/propertiesThunks"
 import { BackendErrorMessage } from "../../../components/BackendErrorMessage";
 import { clearError } from "../../../store/properties/propertiesSlice";
 import { useNavigate } from "react-router-dom";
+import { Loading } from "../../../components/Loading";
 
 const schema = stepTwoValidations;
 
@@ -27,7 +28,7 @@ export const PropertyCreateStepTwo = () => {
   const navigate = useNavigate();
   
   const {paymentFrequencies=[], contactNumbers=[]} = useSelector(state => state.propertyMetadata);
-  const {error} = useSelector(state => state.properties);
+  const {loading, error} = useSelector(state => state.properties);
 
   useEffect(() => {
     dispatch(getPaymentFrequencies());
@@ -169,8 +170,9 @@ export const PropertyCreateStepTwo = () => {
             ))}
           </div>
         </div>
-        <PrimaryButton className="mt-5" type="submit">
+        <PrimaryButton className="mt-5" type="submit" disabled={loading}>
           Continuar
+          { loading && <Loading className={'size-4 ml-2'}/> }
         </PrimaryButton>
       </form>
       {error && <BackendErrorMessage errorMessage={error} handleClose={() => dispatch(clearError())}/>}
