@@ -43,6 +43,7 @@ export const PropertyCreateStepTwo = () => {
       const existingNumbers = fields.map(field => field.value);
       if(!existingNumbers.includes(numberInput.trim())){
         append({value:numberInput.trim()});
+        clearErrors("numbers");
       }
       setNumberInput('');
       return;
@@ -55,6 +56,7 @@ export const PropertyCreateStepTwo = () => {
     const existingNumbers = fields.map(field => field.value);
     if(!existingNumbers.includes(contactNumber)){
       append({value:contactNumber});
+      clearErrors("numbers");
     }
   }
 
@@ -67,7 +69,7 @@ export const PropertyCreateStepTwo = () => {
     return null;
   }
 
-  const {register, handleSubmit, setError, control, formState: { errors }} = useForm({ resolver: yupResolver(schema)});
+  const {register, handleSubmit, setError, clearErrors, control, formState: { errors }} = useForm({ resolver: yupResolver(schema)});
   const { fields, append, remove } = useFieldArray({control, name: "numbers"});
 
   const onSubmit = async (data) => {
@@ -124,7 +126,8 @@ export const PropertyCreateStepTwo = () => {
           </div>
         </div>
         <div className="relative">
-          <p className="text-[#2D2D2D]">Permite que los interesados puedan contactarte</p>
+          <p className="text-[#414141]">Ingresa o selecciona números de teléfono</p>
+          <p className="text-[#7a7a7a] text-sm">Para agregar un nuevo número escribe y presiona en agregar</p>
           <div className="flex items-center">
             <TextInput
               value={numberInput}
@@ -132,7 +135,7 @@ export const PropertyCreateStepTwo = () => {
               name={'number'}
               type={"number"}
               className={'w-full'}
-              placeholder={"Ingresa uno o más números de teléfono"}
+              placeholder={"Permite que los interesados puedan contactarte"}
               onClick={(()=>{setOpen(!open)})}
             />
             <SecondaryButton className={"mx-2 border-2"} type="button" onClick={() => addContactNumber()}>
