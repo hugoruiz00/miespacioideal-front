@@ -28,7 +28,7 @@ export const PropertyCreateStepTwo = () => {
   const navigate = useNavigate();
   
   const {paymentFrequencies=[], contactNumbers=[]} = useSelector(state => state.propertyMetadata);
-  const {loading, error} = useSelector(state => state.properties);
+  const {currentProperty, loading, error} = useSelector(state => state.properties);
 
   useEffect(() => {
     dispatch(getPaymentFrequencies());
@@ -69,7 +69,14 @@ export const PropertyCreateStepTwo = () => {
     return null;
   }
 
-  const {register, handleSubmit, setError, clearErrors, control, formState: { errors }} = useForm({ resolver: yupResolver(schema)});
+  const isRent = () => {
+    const serviceTypes = currentProperty?.service_types || [];
+    return serviceTypes.some(serviceType => serviceType.name == 'Renta');
+  }
+
+  const {register, handleSubmit, setError, clearErrors, control, formState: { errors }} = useForm(
+    {resolver: yupResolver(schema), context: {isRent: isRent()}}
+  );
   const { fields, append, remove } = useFieldArray({control, name: "numbers"});
 
   const onSubmit = async (data) => {
@@ -95,7 +102,7 @@ export const PropertyCreateStepTwo = () => {
         </div>
         <div className="mt-2 mb-3">
           <div className="flex space-x-4">
-            <div className="w-1/2" >
+            <div className={isRent() ? 'w-1/2' : 'w-full'} >
               <p className="text-[#2D2D2D]">¿Cuál es el precio?</p>
               <TextInput
                 register={register}
@@ -106,6 +113,7 @@ export const PropertyCreateStepTwo = () => {
               {errors.price && <ErrorMessage message={errors.price?.message} className={'mt-2'}/>}
             </div>
 
+            { isRent() &&
             <div className="w-1/2">
               <p className="text-[#2D2D2D]">Periodicidad</p>
               <select
@@ -123,6 +131,7 @@ export const PropertyCreateStepTwo = () => {
               </select>
               {errors.paymentFrequencyId && <ErrorMessage message={errors.paymentFrequencyId?.message} className={'mt-2'}/>}
             </div>
+            }
           </div>
         </div>
         <div className="relative">

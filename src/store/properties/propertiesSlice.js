@@ -35,6 +35,7 @@ export const propertiesSlice = createSlice({
     },
     setError: (state, action) => {
       state.error = action.payload;
+      state.loading = false;
     },
     clearError: (state) => {
       state.error = null;
