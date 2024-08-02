@@ -2,8 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   properties: [],
-  page: null,
-  totalPages: null,
+  paginationData: null,
   error: null,
   loading: true,
   currentProperty: null,
@@ -20,6 +19,10 @@ export const propertiesSlice = createSlice({
     },
     setProperties: (state, action) => {
       state.properties = action.payload.data;
+      state.paginationData = {
+        currentPage: action.payload.meta.current_page,
+        lastPage: action.payload.meta.last_page
+      };
       state.loading = false;
     },
     setCurrentProperty: (state, action) => {

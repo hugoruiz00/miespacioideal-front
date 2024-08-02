@@ -7,8 +7,8 @@ import { PrimaryButton } from "../components/PrimaryButton";
 import { BackendErrorMessage } from "../components/BackendErrorMessage";
 import { clearError } from "../store/properties/propertiesSlice";
 import { TbHomeSearch } from "react-icons/tb";
-import { Loading } from '../components/Loading';
 import { LoadingCenter } from "../components/LoadingCenter";
+import { Pagination } from "../components/Pagination";
 
 const getServiceTypeNames = (serviceTypes) => {
   if(!serviceTypes) return "";
@@ -25,11 +25,15 @@ const getFirstImage = (images) => {
 export const Home = () => {
 
   const dispatch = useDispatch();
-  const {properties, loading, error} = useSelector(state => state.properties);
+  const {properties, paginationData, loading, error} = useSelector(state => state.properties);
 
   useEffect(() => {
-    dispatch(getProperties());
+    changePage(1);
   }, [])
+
+  const changePage = (page) => {
+    dispatch(getProperties(page));
+  }
 
   if(loading){
     return <LoadingCenter loadingClass="h-10 w-10" />
@@ -114,6 +118,8 @@ export const Home = () => {
                 ))
               }
             </section>
+
+            <Pagination paginationData={paginationData} onChangePage={changePage}/>
           </div>
         </div>
       </div>

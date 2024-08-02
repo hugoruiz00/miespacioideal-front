@@ -77,12 +77,9 @@ export const getUser = () => {
 //   }, 5000);
 // }
 
-
-// LOADING
 // CLICK OUTSIDE PARA EL DROPDOWN DEL HEADER EN MOBILE
 //* SEPARAR EN COMPONENTES LAS PROPIEDADES EN EL HOME
 //* ENVIAR EL MANEJO DE ERRORES DE LOS API A UN HELPER
-// PAGINAR DATOS EN EL HOME
 // MANEJAR CONSTANTES PARA LOS STEP
 // ocultar periodicidad cuando es solo venta
 // Ver mensajes de error y que estén en español en los steps

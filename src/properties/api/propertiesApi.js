@@ -1,8 +1,8 @@
 import axiosClient from "../../helpers/axios-client";
 
-export const getPropertiesApi = async () => {
+export const getPropertiesApi = async (page) => {
   try {
-    const res = await axiosClient.get('/properties');
+    const res = await axiosClient.get(`/properties?page=${page}`);
 
     return {
       ok: true,

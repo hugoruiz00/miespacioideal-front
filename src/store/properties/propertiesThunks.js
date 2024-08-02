@@ -1,11 +1,11 @@
 import { createOwnerPropertyApi, getPropertiesApi, getOwnerPropertyApi } from "../../properties/api/propertiesApi";
 import { setCurrentProperty, setCurrentStep, setError, setProperties, updateLoading } from "./propertiesSlice";
 
-export const getProperties = () => {
+export const getProperties = (page = 1) => {
   return async( dispatch ) => {
     dispatch( updateLoading(true) );
 
-    const result = await getPropertiesApi();
+    const result = await getPropertiesApi(page);
 
     if ( !result.ok ) return dispatch( setError( result.error ) );
 
