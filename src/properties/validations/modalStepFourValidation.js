@@ -1,4 +1,4 @@
-import * as yup from "yup"
+import yup from './messageValidations';
 
 export const modalStepFourValidations = yup.object({
   description: yup.string().max(5000),

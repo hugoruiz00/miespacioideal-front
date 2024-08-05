@@ -1,4 +1,4 @@
-import * as yup from "yup"
+import yup from './messageValidations';
 
 export const stepOneValidations = yup.object({
   propertyTypeId: yup.number().required(),

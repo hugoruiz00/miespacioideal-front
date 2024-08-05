@@ -4,7 +4,7 @@ const initialState = {
   properties: [],
   paginationData: null,
   error: null,
-  loading: true,
+  loading: false,
   currentProperty: null,
   currentStep: 'step-one',
 }
