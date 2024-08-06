@@ -4,7 +4,7 @@ export const validateListImages = (images) => {
 
   if(images.length == 0) return 'Agrega al menos una fotografía';
 
-  if(images.length > 5) return 'Puedes agregar como máximo 5 fotografías';
+  if(images.length > 10) return 'Puedes agregar como máximo 5 fotografías';
 
   return 'valid';
 }
