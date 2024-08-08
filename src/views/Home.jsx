@@ -43,10 +43,10 @@ export const Home = () => {
     <div className="py-9">
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-2">
         <div className='flex'>
-          <div className='w-2/12'>
-              
-          </div>
-          <div className='w-9/12'>
+          {/* <div className='hidden sm:block sm:w-2/12'>
+
+          </div> */}
+          <div className='w-full mx-2'>
             <form className="flex items-center mx-2">   
               <label htmlFor="voice-search" className="sr-only">Buscar</label>
               <div className="relative w-full">
@@ -57,7 +57,7 @@ export const Home = () => {
                     type="text"
                     id="voice-search"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#FF5C00] focus:border-[#FF5C00] block w-full pl-10 p-2.5"
-                    placeholder="Buscar cuartos en renta, casas en venta..."/>
+                    placeholder="Buscar..."/>
               </div>  
               <button type="submit" className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-[#FF5C00] rounded-lg border hover:bg-[#CF4D04]">Buscar</button>
             </form>
@@ -70,10 +70,10 @@ export const Home = () => {
               </div>
             }
 
-            <section className="flex justify-between flex-wrap mt-3">
+            <section className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {
                 properties.map(property => (                  
-                  <div key={property.id} className="w-1/3">
+                  <div key={property.id}>
                       <div className="bg-white shadow-md rounded-md my-2 mx-2">
                           <img className="rounded-md" src={`${import.meta.env.VITE_API_BASE_URL}${getFirstImage(property.images)}`} alt={property.property_type?.name} />
                           <div className="p-3">
@@ -119,7 +119,7 @@ export const Home = () => {
               }
             </section>
 
-            <Pagination paginationData={paginationData} onChangePage={changePage}/>
+            {paginationData && <Pagination paginationData={paginationData} onChangePage={changePage}/>}
           </div>
         </div>
       </div>

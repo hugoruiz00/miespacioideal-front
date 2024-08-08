@@ -81,7 +81,9 @@ export const getUser = () => {
 //* ENVIAR EL MANEJO DE ERRORES DE LOS API A UN HELPER
 //* Vista de progreso lateral de steps
 //* MANEJAR CONSTANTES PARA LOS STEP
-// CLICK OUTSIDE PARA EL DROPDOWN DEL HEADER EN MOBILE
-// Ver mensajes de error y que estén en español en los steps
-// Responsivo
+//* Por ahora no se implementarán filtros complejos de categorías y eso. Solo será un filtro de un input text.
+// Responsivo (revisar si hay que agregar el botón de ingresar ahí)
 // validaciones y restricciones de roles.
+// Poder acceder a propiedades sin estar loggeado
+// Botón de regresar en crear en steps
+// Buscador en el home

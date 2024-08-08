@@ -28,7 +28,8 @@ export const Login = () => {
 
   return (
     <div className='py-12'>
-      <div className="flex sm:justify-evenly items-center pt-6 sm:pt-0">
+      <h1 className="my-4 text-5xl font-bold text-[#FF5C00] md:hidden text-center mx-2">Mi espacio ideal</h1>
+      <div className="flex flex-col md:flex-row sm:justify-evenly items-center pt-6 sm:pt-0 mx-5">
         <div className="flex flex-col items-center">
           <img src={Logo} className="App-logo" alt="logo" width={200}/>
           <div>
@@ -47,10 +48,10 @@ export const Login = () => {
           </div>
         </div>
 
-        <hr className="h-96 mx-6 border-2 border-[#BBBBBB] rounded-md" />
+        <hr className="h-96 mx-6 border-2 border-[#BBBBBB] rounded-md hidden md:block" />
 
         <div className="flex flex-col items-center text-center">
-          <h1 className="my-4 text-5xl font-bold text-[#FF5C00]">Mi espacio ideal</h1>
+          <h1 className="my-4 text-5xl font-bold text-[#FF5C00] hidden md:block">Mi espacio ideal</h1>
           <p className="my-4 text-2xl text-[#5F5F5F]">
             Comienza a publicar tus anuncios de <br/> forma <span className="font-bold">fácil</span> y <span className="font-bold">rápida</span>
           </p>

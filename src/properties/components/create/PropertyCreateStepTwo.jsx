@@ -101,8 +101,8 @@ export const PropertyCreateStepTwo = () => {
           {errors.description && <ErrorMessage message={errors.description?.message} className={'mt-1'}/>}
         </div>
         <div className="mt-2 mb-3">
-          <div className="flex space-x-4">
-            <div className={isRent() ? 'w-1/2' : 'w-full'} >
+          <div className="flex flex-col md:flex-row md:space-x-4">
+            <div className={isRent() ? 'md:w-1/2' : 'w-full'} >
               <p className="text-[#2D2D2D]">¿Cuál es el precio?</p>
               <TextInput
                 register={register}
@@ -114,7 +114,7 @@ export const PropertyCreateStepTwo = () => {
             </div>
 
             { isRent() &&
-            <div className="w-1/2">
+            <div className="md:w-1/2">
               <p className="text-[#2D2D2D]">Periodicidad</p>
               <select
                 {...register("paymentFrequencyId")}

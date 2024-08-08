@@ -26,10 +26,10 @@ export const Property = () => {
     <div className="py-9">
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-2">
         <div className='flex'>
-          <div className='w-2/12'>
+          {/* <div className='w-2/12'>
 
-          </div>
-          <div className='w-9/12'>
+          </div> */}
+          <div className='w-full mx-3 md:mx-12'>
             <Outlet />
           </div>
         </div>
