@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from '../../store/auth/thunks';
-import { Navbar } from '../../components/navbar/Navbar';
-import { LoadingCenter } from '../../components/LoadingCenter';
+import { getUser } from '../store/auth/thunks';
+import { Navbar } from '../components/navbar/Navbar';
+import { LoadingCenter } from '../components/LoadingCenter';
 
 export const DefaultLayout = () => {
   const dispatch = useDispatch();

@@ -1,18 +1,28 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
-import { Signup } from "../auth/views/Signup";
 import { NotFound } from "../views/NotFound";
-import { DefaultLayout } from "../properties/layout/DefaultLayout";
+import { DefaultLayout } from "../layouts/DefaultLayout";
 import { Home } from "../views/Home";
 import { Login } from "../auth/views/Login";
-import { GuestLayout } from "../auth/layout/GuestLayout";
 import { AuthCallback } from "../auth/views/AuthCallback";
 import { Property } from "../properties/components/create/Property";
 import { PropertyCreateStepOne } from "../properties/components/create/PropertyCreateStepOne";
 import { PropertyCreateStepTwo } from "../properties/components/create/PropertyCreateStepTwo";
 import { PropertyCreateStepThree } from "../properties/components/create/PropertyCreateStepThree";
 import { PropertyCreateStepFour } from "../properties/components/create/PropertyCreateStepFour";
+import { GuestLayout } from "../layouts/GuestLayout";
+import { GeneralLayout } from "../layouts/GeneralLayout";
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <GeneralLayout />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+    ]
+  },
   {
     path: '/',
     element: <DefaultLayout />,
@@ -21,10 +31,6 @@ const router = createBrowserRouter([
       //   path: '/',
       //   element: <Navigate to={'/users'}/>
       // },
-      {
-        path: '/',
-        element: <Home />
-      },
       {
         path: '/property',
         element: <Property />,
@@ -61,10 +67,10 @@ const router = createBrowserRouter([
         path: '/auth/callback',
         element: <AuthCallback />
       },
-      {
-        path: '/signup',
-        element: <Signup />
-      },
+      // {
+      //   path: '/signup',
+      //   element: <Signup />
+      // },
     ]
   },
   {
