@@ -82,8 +82,9 @@ export const getUser = () => {
 //* Vista de progreso lateral de steps
 //* MANEJAR CONSTANTES PARA LOS STEP
 //* Por ahora no se implementarán filtros complejos de categorías y eso. Solo será un filtro de un input text.
-// Responsivo (revisar si hay que agregar el botón de ingresar ahí)
-// validaciones y restricciones de roles.
-// Poder acceder a propiedades sin estar loggeado
+//* Todavía no se va implementar roles y permisos, por ahora todos podrán crear propiedades (validaciones y restricciones de roles).
+// Se va a validar que no puedan ver (todas las propiedades) o editar propiedades de otros.
+// Opción para editar
+// Marcar los navbar buttons cuando esté en esa parte.
 // Botón de regresar en crear en steps
 // Buscador en el home

@@ -46,7 +46,7 @@ export const Navbar = () => {
                     Publica tu anuncio
                   </NavLinkOption> {/**Crear propiedad */}
                   {user && <Dropdown />}
-                  {!user && <NavLinkOption>Ingresar</NavLinkOption> }{/**Crear propiedad */}                        
+                  {!user && <NavLinkOption to={'/login'}>Ingresar</NavLinkOption> }{/**Crear propiedad */}
                 </div>
               }
 
@@ -85,9 +85,16 @@ export const Navbar = () => {
                 to={'property/step-one'}>
                 Publica tu anuncio
               </ResponsiveNavLink>
-              <ResponsiveNavLink onClick={onLogout} to={'logout'}>
+              { !user &&
+                <ResponsiveNavLink
+                to={'login'}
+                >
+                Ingresar
+              </ResponsiveNavLink>}
+              { user &&
+                <ResponsiveNavLink onClick={onLogout} to={'logout'}>
                 Cerrar sesión
-              </ResponsiveNavLink>                    
+              </ResponsiveNavLink>}
             </div>
           </div>
         </div>
