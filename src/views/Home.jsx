@@ -9,6 +9,7 @@ import { clearError } from "../store/properties/propertiesSlice";
 import { TbHomeSearch } from "react-icons/tb";
 import { LoadingCenter } from "../components/LoadingCenter";
 import { Pagination } from "../components/Pagination";
+import { API_URL } from "../constants/constants";
 
 const getServiceTypeNames = (serviceTypes) => {
   if(!serviceTypes) return "";
@@ -75,7 +76,7 @@ export const Home = () => {
                 properties.map(property => (                  
                   <div key={property.id}>
                       <div className="bg-white shadow-md rounded-md my-2 mx-2">
-                          <img className="rounded-md" src={`${import.meta.env.VITE_API_BASE_URL}${getFirstImage(property.images)}`} alt={property.property_type?.name} />
+                          <img className="rounded-md" src={`${API_URL}${getFirstImage(property.images)}`} alt={property.property_type?.name} />
                           <div className="p-3">
                               <p>{property.property_type?.name} en {getServiceTypeNames(property.service_types)}</p>
                               <p className="text-[#5F5F5F]">{property['address']}</p>

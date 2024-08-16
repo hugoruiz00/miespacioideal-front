@@ -27,9 +27,9 @@ export const PropertyCreateStepFour = () => {
   const [searchText, setSearchText] = useState('');
 
   const {details=[]} = useSelector(state => state.propertyMetadata);
-  const {loading, error} = useSelector(state => state.properties);
+  const {currentProperty, loading, error} = useSelector(state => state.properties);
 
-  const { handleSubmit, control } = useForm();
+  const { handleSubmit, control, reset } = useForm();
   const { fields, append, update, remove } = useFieldArray({control, name: "details"});
 
   const filteredDetails = details.filter(detail =>{
@@ -41,6 +41,20 @@ export const PropertyCreateStepFour = () => {
     dispatch(getDetails());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (currentProperty) {      
+      reset({
+        details: currentProperty.details.map(detail => ({
+          value: detail.pivot.value,
+          description: detail.pivot.description, 
+          detail: detail.detail,
+          icon: detail.icon,
+          datatype: detail.datatype,
+          detailId: detail.id
+        })),
+      });
+    }
+  }, [currentProperty, reset]);
 
   const onSubmit = async (data) => {
     data.details.forEach(detail => {
@@ -60,7 +74,7 @@ export const PropertyCreateStepFour = () => {
     // }
   }
 
-  const {register: registerModal, handleSubmit: handleSubmitModal, reset, setValue, 
+  const {register: registerModal, handleSubmit: handleSubmitModal, reset: resetModal, setValue, 
     formState: { errors: errorsModal, isSubmitSuccessful }} = useForm(
       {resolver: yupResolver(modalSchema), context: {datatype: detail?.datatype}}
     );
@@ -90,9 +104,9 @@ export const PropertyCreateStepFour = () => {
 
   useEffect(() => {
     if(isSubmitSuccessful){
-      reset();
+      resetModal();
     }
-  }, [isSubmitSuccessful, reset])
+  }, [isSubmitSuccessful, resetModal])
 
 
   return (
@@ -141,7 +155,7 @@ export const PropertyCreateStepFour = () => {
                     >
                       <PiPlusCircle
                         onClick={() => {
-                          reset();
+                          resetModal();
                           setOpen(true);
                           setDetail(detail);
                         }}

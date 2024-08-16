@@ -88,3 +88,9 @@ export const getUser = () => {
 // Marcar los navbar buttons cuando esté en esa parte.
 // Botón de regresar en crear en steps
 // Buscador en el home
+// validar que pueda guardar la propiedad hasta que todos los campos estén setteados
+// Tamaño del loading en los botones
+// botones de regresar en los steps
+// agregar wrap a las imágenes selccionadas porque cuando hay 10 y es en móvil no se ve bien
+
+

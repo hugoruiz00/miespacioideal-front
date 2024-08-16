@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ErrorMessage } from '../../../components/ErrorMessage';
 import { stepOneValidations } from '../../validations/stepOneValidations';
 import { createOwnerProperty } from '../../../store/properties/propertiesThunks';
-import { clearError, setCurrentStep } from '../../../store/properties/propertiesSlice';
+import { clearError } from '../../../store/properties/propertiesSlice';
 import { BackendErrorMessage } from '../../../components/BackendErrorMessage';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../../../components/Loading';
@@ -22,14 +22,23 @@ export const PropertyCreateStepOne = () => {
   const navigate = useNavigate();
 
   const {propertyTypes=[]} = useSelector(state => state.propertyMetadata);
-  const {loading, error} = useSelector(state => state.properties);
+  const {currentProperty, loading, error} = useSelector(state => state.properties);
+  const {register, watch, handleSubmit, formState: { errors }, reset} = useForm({ resolver: yupResolver(schema)});
+  const watchPropertyType = watch("propertyTypeId", null);
 
   useEffect(() => {
     dispatch(getPropertyTypes());
   }, [])
 
-  const {register, watch, handleSubmit, formState: { errors }} = useForm({ resolver: yupResolver(schema)});
-  const watchPropertyType = watch("propertyTypeId", null);
+  useEffect(() => {
+    if (currentProperty) {
+      reset({
+        propertyTypeId: currentProperty.property_type_id,
+        serviceTypes: currentProperty.service_types.map(service => service.id.toString()),
+        address: currentProperty.address
+      });
+    }
+  }, [currentProperty, reset]);
   
   const onSubmit = async (data) => {
     const property = await dispatch(createOwnerProperty(data, 'step-one'));

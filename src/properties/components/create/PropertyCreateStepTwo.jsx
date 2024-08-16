@@ -20,15 +20,25 @@ const schema = stepTwoValidations;
 
 export const PropertyCreateStepTwo = () => {
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
   const [numberInput, setNumberInput] = useState('');
   const [divNumbersRef] = useClickOutside(setOpen);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   
   const {paymentFrequencies=[], contactNumbers=[]} = useSelector(state => state.propertyMetadata);
   const {currentProperty, loading, error} = useSelector(state => state.properties);
+
+  const isRent = () => {
+    const serviceTypes = currentProperty?.service_types || [];
+    return serviceTypes.some(serviceType => serviceType.name == 'Renta');
+  }
+
+  const {register, handleSubmit, setError, clearErrors, control, formState: { errors }, reset} = useForm(
+    {resolver: yupResolver(schema), context: {isRent: isRent()}}
+  );
+  const { fields, append, remove } = useFieldArray({control, name: "numbers"});
 
   useEffect(() => {
     dispatch(getPaymentFrequencies());
@@ -37,6 +47,17 @@ export const PropertyCreateStepTwo = () => {
   useEffect(() => {
     dispatch(getContactNumbers());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (currentProperty) {
+      reset({
+        description: currentProperty.description,
+        price: currentProperty.price,
+        paymentFrequencyId: currentProperty.payment_frequency_id,
+        numbers: currentProperty.contact_numbers.map(number => ({value:number.contact_number})),
+      });
+    }
+  }, [currentProperty, reset]);
 
   const addContactNumber = () => {
     if(numberInput!=null && numberInput.trim().length == 10){
@@ -68,16 +89,6 @@ export const PropertyCreateStepTwo = () => {
     }
     return null;
   }
-
-  const isRent = () => {
-    const serviceTypes = currentProperty?.service_types || [];
-    return serviceTypes.some(serviceType => serviceType.name == 'Renta');
-  }
-
-  const {register, handleSubmit, setError, clearErrors, control, formState: { errors }} = useForm(
-    {resolver: yupResolver(schema), context: {isRent: isRent()}}
-  );
-  const { fields, append, remove } = useFieldArray({control, name: "numbers"});
 
   const onSubmit = async (data) => {
     const property = await dispatch(createOwnerProperty(data, 'step-two'));

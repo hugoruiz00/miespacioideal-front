@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PrimaryButton } from "../../../components/PrimaryButton"
 import { FaTimesCircle } from "react-icons/fa";
 import { validateImage, validateListImages } from "../../validations/stepThreeValidations";
@@ -9,6 +9,7 @@ import { BackendErrorMessage } from "../../../components/BackendErrorMessage";
 import { clearError } from "../../../store/properties/propertiesSlice";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../../../components/Loading";
+import { API_URL } from "../../../constants/constants";
 
 export const PropertyCreateStepThree = () => {
 
@@ -16,13 +17,20 @@ export const PropertyCreateStepThree = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef();
   const [selectedImages, setSelectedImages] = useState([]);
+  const [existingImages, setExistingImages] = useState([]);
   const [errorImages, setErrorImages] = useState(null);
-  const {loading, error} = useSelector(state => state.properties);
+  const {currentProperty, loading, error} = useSelector(state => state.properties);
+
+  useEffect(() => {
+    if (currentProperty) {
+      setExistingImages(currentProperty.images || []);
+    }
+  }, [currentProperty]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const imagesValidation = validateListImages(selectedImages);
+    const imagesValidation = validateListImages(selectedImages, existingImages);
     if(imagesValidation !== 'valid') {
       setErrorImages(imagesValidation);
       return;
@@ -32,6 +40,10 @@ export const PropertyCreateStepThree = () => {
     const formData = new FormData();
     selectedImages.forEach(image => {
       formData.append('images[]', image);
+    });
+
+    existingImages.forEach(image => {
+      formData.append('existing_images[]', image.id);
     });
 
     const property = await dispatch(createOwnerProperty(formData, 'step-three'));
@@ -53,9 +65,13 @@ export const PropertyCreateStepThree = () => {
     setSelectedImages((prevImages) => [...prevImages, ...files]);
   }
 
-  const handleDeleteImage = (event, index) => {
+  const handleDeleteImage = (event, index, exists = false) => {
     event.stopPropagation();
-    setSelectedImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    if (exists) {
+      setExistingImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    } else {
+      setSelectedImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    }
     fileInputRef.current.value = null;
   }
 
@@ -68,17 +84,28 @@ export const PropertyCreateStepThree = () => {
         <div
           onClick={ () => fileInputRef.current.click() }
           className={`py-6 w-full h-36 rounded border-dashed border-2 flex gap-2 justify-center items-center cursor-pointer
-            ${selectedImages.length > 0 ? 'bg-[#cff0dc] border-green-600' : 'bg-[#e0e0e0] border-gray-600'}`}>
+            ${selectedImages.length > 0 || existingImages.length > 0 ? 'bg-[#cff0dc] border-green-600' : 'bg-[#e0e0e0] border-gray-600'}`}>
           <input
             ref={ fileInputRef }
             id="images" name="images" type="file" accept="image/*" multiple className="hidden"
             onChange={handleImageChange}
           />
-          {selectedImages.length == 0 &&
+          {selectedImages.length == 0 && existingImages.length === 0 &&
             <span className="text-slate-600 mx-5 absolute">
               Haz click para agregar fotografías de tu propiedad
             </span>
           }
+          {existingImages.map((image, index) => (
+            <div key={index} className="cursor-default relative">
+              <img
+                src={`${API_URL}${image.image_url}`}
+                alt={`preview ${index}`}
+                className="w-20 h-20"
+                onClick={(event) => event.stopPropagation()}
+              />
+              <FaTimesCircle className="absolute top-1 right-1 cursor-pointer" onClick={(event) => handleDeleteImage(event, index, true)} />
+            </div>
+          ))}
           {selectedImages.map((image, index) => (
             <div key={index} className="cursor-default relative">
               <img
