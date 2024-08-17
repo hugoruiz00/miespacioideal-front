@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { getOwnerProperty } from '../../../store/properties/propertiesThunks';
+import { setCurrentProperty } from '../../../store/properties/propertiesSlice';
 
 export const Property = () => {
 
@@ -21,6 +22,12 @@ export const Property = () => {
 
     fetchProperty();
   }, [dispatch, params]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(setCurrentProperty(null));
+    };
+  }, [dispatch]);
 
   return (
     <div className="py-9">
