@@ -10,6 +10,7 @@ import { clearError } from "../../../store/properties/propertiesSlice";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../../../components/Loading";
 import { API_URL } from "../../../constants/constants";
+import { SecondaryButton } from "../../../components/SecondaryButton";
 
 export const PropertyCreateStepThree = () => {
 
@@ -119,10 +120,18 @@ export const PropertyCreateStepThree = () => {
           ))}
         </div>
         
-        <PrimaryButton className="mt-5" type="submit" disabled={loading}>
-          Continuar
-          { loading && <Loading className={'size-4 ml-2'}/> }
-        </PrimaryButton>
+        <div className="flex justify-end mt-5">
+          <SecondaryButton type="button" className={'mr-5'} disabled={loading}
+            onClick={() => navigate(`/property/step-two/${currentProperty.id}`)}>
+            Anterior
+            { loading && <Loading className={'h-4 w-4 ml-2'}/> }
+          </SecondaryButton>
+
+          <PrimaryButton type="submit" disabled={loading}>
+            Continuar
+            { loading && <Loading className={'h-4 w-4 ml-2'}/> }
+          </PrimaryButton>
+        </div>
       </form>
       <div>
         {errorImages && <ErrorMessage message={errorImages} className={'mt-1'}/>}

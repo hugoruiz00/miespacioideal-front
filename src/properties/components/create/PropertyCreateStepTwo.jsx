@@ -193,10 +193,18 @@ export const PropertyCreateStepTwo = () => {
             ))}
           </div>
         </div>
-        <PrimaryButton className="mt-5" type="submit" disabled={loading}>
-          Continuar
-          { loading && <Loading className={'size-4 ml-2'}/> }
-        </PrimaryButton>
+        <div className="flex justify-end mt-5">
+          <SecondaryButton type="button" className={'mr-5'} disabled={loading}
+            onClick={() => navigate(`/property/step-one/${currentProperty.id}`)}>
+            Anterior
+            { loading && <Loading className={'h-4 w-4 ml-2'}/> }
+          </SecondaryButton>
+
+          <PrimaryButton type="submit" disabled={loading}>
+            Continuar
+            { loading && <Loading className={'h-4 w-4 ml-2'}/> }
+          </PrimaryButton>
+        </div>        
       </form>
       {error && <BackendErrorMessage errorMessage={error} handleClose={() => dispatch(clearError())}/>}
     </div>

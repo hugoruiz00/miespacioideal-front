@@ -16,12 +16,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { BackendErrorMessage } from "../../../components/BackendErrorMessage";
 import { clearError } from "../../../store/properties/propertiesSlice";
 import { Loading } from "../../../components/Loading";
+import { SecondaryButton } from "../../../components/SecondaryButton";
+import { useNavigate } from "react-router-dom";
 
 const modalSchema = modalStepFourValidations;
 
 export const PropertyCreateStepFour = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
   const [detail, setDetail] = useState(null);
   const [searchText, setSearchText] = useState('');
@@ -203,10 +207,18 @@ export const PropertyCreateStepFour = () => {
             })}
           </div>
         </div>
-        <PrimaryButton className={'mt-5'} type="submit" disabled={loading}>
-          Publicar propiedad
-          { loading && <Loading className={'size-4 ml-2'}/> }
-        </PrimaryButton>
+        <div className="flex justify-end mt-5">
+          <SecondaryButton type="button" className={'mr-5'} disabled={loading}
+            onClick={() => navigate(`/property/step-three/${currentProperty.id}`)}>
+            Anterior
+            { loading && <Loading className={'h-4 w-4 ml-2'}/> }
+          </SecondaryButton>
+
+          <PrimaryButton type="submit" disabled={loading}>
+            Publicar propiedad
+            { loading && <Loading className={'h-4 w-4 ml-2'}/> }
+          </PrimaryButton>
+        </div>        
       </form>
 
       <Modal open={open} onClose={() => setOpen(false)}>

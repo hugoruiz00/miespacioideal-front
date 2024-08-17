@@ -104,10 +104,12 @@ export const PropertyCreateStepOne = () => {
             placeholder={"Ingresa una dirección"} />
           {errors.address && <ErrorMessage message={errors.address?.message} className={'mt-2'}/>}
         </div>
-        <PrimaryButton className={'mt-5'} type={'submit'} disabled={loading}>
-          Continuar
-          { loading && <Loading className={'size-4 ml-2'}/> }
-        </PrimaryButton>
+        <div className="flex justify-end mt-5">
+          <PrimaryButton type="submit" disabled={loading}>
+            Continuar
+            { loading && <Loading className={'h-4 w-4 ml-2'}/> }
+          </PrimaryButton>
+        </div>
       </form>
       {/* [#00a762] */}
       {error && <BackendErrorMessage errorMessage={error} handleClose={() => dispatch(clearError())}/>}
