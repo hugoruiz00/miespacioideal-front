@@ -42,7 +42,8 @@ export const Navbar = () => {
                 <div className="hidden sm:flex sm:items-center sm:ml-6">
                   <NavLinkOption
                     className={'mr-3'}
-                    to={'property/step-one'}>
+                    to={'property/step-one'}
+                    customActive={'/property/step'}>
                     Publica tu anuncio
                   </NavLinkOption> {/**Crear propiedad */}
                   {user && <Dropdown />}
@@ -82,7 +83,8 @@ export const Navbar = () => {
             <div className="mt-3 space-y-1">
               {/* <!-- Authentication --> */}
               <ResponsiveNavLink
-                to={'property/step-one'}>
+                to={'property/step-one'}
+                customActive={'/property/step'}>
                 Publica tu anuncio
               </ResponsiveNavLink>
               { !user &&
