@@ -83,14 +83,7 @@ export const getUser = () => {
 //* MANEJAR CONSTANTES PARA LOS STEP
 //* Por ahora no se implementarán filtros complejos de categorías y eso. Solo será un filtro de un input text.
 //* Todavía no se va implementar roles y permisos, por ahora todos podrán crear propiedades (validaciones y restricciones de roles).
-// Se va a validar que no puedan ver (todas las propiedades) o editar propiedades de otros.
-// Opción para editar
-// Marcar los navbar buttons cuando esté en esa parte.
-// Botón de regresar en crear en steps
-// Buscador en el home
 // validar que pueda guardar la propiedad hasta que todos los campos estén setteados
-// Tamaño del loading en los botones
-// botones de regresar en los steps
-// agregar wrap a las imágenes selccionadas porque cuando hay 10 y es en móvil no se ve bien
-
+// Se va a validar que no puedan ver (todas las propiedades) o editar propiedades de otros.
+// Buscador en el home
 

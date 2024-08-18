@@ -76,7 +76,10 @@ export const Home = () => {
                 properties.map(property => (                  
                   <div key={property.id}>
                       <div className="bg-white shadow-md rounded-md my-2 mx-2">
-                          <img className="rounded-md" src={`${API_URL}${getFirstImage(property.images)}`} alt={property.property_type?.name} />
+                          <img
+                            className="rounded-md w-full h-48 object-cover"
+                            src={`${API_URL}${getFirstImage(property.images)}`}
+                            alt={property.property_type?.name} />
                           <div className="p-3">
                               <p>{property.property_type?.name} en {getServiceTypeNames(property.service_types)}</p>
                               <p className="text-[#5F5F5F]">{property['address']}</p>

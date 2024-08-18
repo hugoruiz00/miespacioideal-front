@@ -13,6 +13,7 @@ import { clearError } from '../../../store/properties/propertiesSlice';
 import { BackendErrorMessage } from '../../../components/BackendErrorMessage';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../../../components/Loading';
+import { SecondaryButton } from '../../../components/SecondaryButton';
 
 const schema = stepOneValidations;
 
@@ -105,6 +106,12 @@ export const PropertyCreateStepOne = () => {
           {errors.address && <ErrorMessage message={errors.address?.message} className={'mt-2'}/>}
         </div>
         <div className="flex justify-end mt-5">
+          <SecondaryButton type="button" className={'mr-5'} disabled={loading}
+            onClick={() => navigate('/')}>
+            Cancelar
+            { loading && <Loading className={'h-4 w-4 ml-2'}/> }
+          </SecondaryButton>
+
           <PrimaryButton type="submit" disabled={loading}>
             Continuar
             { loading && <Loading className={'h-4 w-4 ml-2'}/> }

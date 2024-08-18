@@ -84,7 +84,7 @@ export const PropertyCreateStepThree = () => {
       <form onSubmit={onSubmit}>
         <div
           onClick={ () => fileInputRef.current.click() }
-          className={`py-6 w-full h-36 rounded border-dashed border-2 flex gap-2 justify-center items-center cursor-pointer
+          className={`py-6 w-full min-h-36 rounded border-dashed border-2 flex flex-wrap gap-2 justify-center items-center cursor-pointer
             ${selectedImages.length > 0 || existingImages.length > 0 ? 'bg-[#cff0dc] border-green-600' : 'bg-[#e0e0e0] border-gray-600'}`}>
           <input
             ref={ fileInputRef }
