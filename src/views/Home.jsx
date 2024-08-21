@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch, FaRegBookmark, FaPhoneAlt  } from "react-icons/fa";
 import { getProperties } from "../store/properties/propertiesThunks";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,14 +27,21 @@ export const Home = () => {
 
   const dispatch = useDispatch();
   const {properties, paginationData, loading, error} = useSelector(state => state.properties);
+  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     changePage(1);
   }, [])
 
   const changePage = (page) => {
-    dispatch(getProperties(page));
+    dispatch(getProperties(page, searchText));
   }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      changePage(1);
+    }
+  };
 
   if(loading){
     return <LoadingCenter loadingClass="h-10 w-10" />
@@ -48,7 +55,7 @@ export const Home = () => {
 
           </div> */}
           <div className='w-full mx-2'>
-            <form className="flex items-center mx-2">   
+            <div className="flex items-center mx-2">   
               <label htmlFor="voice-search" className="sr-only">Buscar</label>
               <div className="relative w-full">
                 <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -56,12 +63,20 @@ export const Home = () => {
                 </div>
                 <input
                     type="text"
-                    id="voice-search"
+                    value={searchText}
+                    onChange={e => setSearchText(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#FF5C00] focus:border-[#FF5C00] block w-full pl-10 p-2.5"
                     placeholder="Buscar..."/>
-              </div>  
-              <button type="submit" className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-[#FF5C00] rounded-lg border hover:bg-[#CF4D04]">Buscar</button>
-            </form>
+              </div>
+              <button
+                type="button"
+                onClick={() => changePage(1)}
+                className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-[#FF5C00] rounded-lg border hover:bg-[#CF4D04]"
+              >
+                Buscar
+              </button>
+            </div>
 
             { properties.length == 0 &&
               <div className="text-center justify-center text-gray-500 font-medium mt-12">

@@ -83,7 +83,5 @@ export const getUser = () => {
 //* MANEJAR CONSTANTES PARA LOS STEP
 //* Por ahora no se implementarán filtros complejos de categorías y eso. Solo será un filtro de un input text.
 //* Todavía no se va implementar roles y permisos, por ahora todos podrán crear propiedades (validaciones y restricciones de roles).
-// validar que pueda guardar la propiedad hasta que todos los campos estén setteados
 // Se va a validar que no puedan ver (todas las propiedades) o editar propiedades de otros.
-// Buscador en el home
 
