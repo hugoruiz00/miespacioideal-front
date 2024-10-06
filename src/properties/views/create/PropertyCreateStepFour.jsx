@@ -72,7 +72,7 @@ export const PropertyCreateStepFour = () => {
     const property = await dispatch(createOwnerProperty(data, 'step-four'));
     console.log(property);
     // if(property.id){
-    // TODO 
+    // TODO
     // Navegar al show property
     //   navigate(`/property/step-three/${property.id}`);
     // }
