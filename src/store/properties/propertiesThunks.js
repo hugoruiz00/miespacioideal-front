@@ -1,4 +1,4 @@
-import { createOwnerPropertyApi, getPropertiesApi, getOwnerPropertyApi } from "../../properties/api/propertiesApi";
+import { createOwnerPropertyApi, getPropertiesApi, getOwnerPropertyApi, getPropertyApi } from "../../properties/api/propertiesApi";
 import { setCurrentProperty, setCurrentStep, setError, setProperties, updateLoading } from "./propertiesSlice";
 
 export const getProperties = (page = 1, search='') => {
@@ -19,6 +19,22 @@ export const getOwnerProperty = (propertyId) => {
     dispatch( updateLoading(true) );
 
     const result = await getOwnerPropertyApi(propertyId);
+
+    if ( !result.ok ){
+      dispatch( setError( result.error ) );
+      return false;
+    }
+
+    dispatch( setCurrentProperty( result.data ));
+    return true;
+  }
+}
+
+export const getProperty = (propertyId) => {
+  return async( dispatch ) => {
+    dispatch( updateLoading(true) );
+
+    const result = await getPropertyApi(propertyId);
 
     if ( !result.ok ){
       dispatch( setError( result.error ) );

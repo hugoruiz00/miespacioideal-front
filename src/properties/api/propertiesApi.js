@@ -54,6 +54,24 @@ export const getOwnerPropertyApi = async (propertyId) => {
   }
 }
 
+export const getPropertyApi = async (propertyId) => {
+  try {
+    const res = await axiosClient.get(`/properties/${propertyId}`);
+
+    return {
+      ok: true,
+      data: res.data,
+    }
+  } catch (error) {
+    let errorMessage = "No se pudo consultar la información";
+
+    return {
+      ok: false,
+      error: errorMessage,
+    }
+  }
+}
+
 export const createOwnerPropertyApi = async (data, step) => {
   try {
     const res = await axiosClient.post(`/owner/properties/create/${step}`, data);

@@ -83,5 +83,6 @@ export const getUser = () => {
 //* MANEJAR CONSTANTES PARA LOS STEP
 //* Por ahora no se implementarán filtros complejos de categorías y eso. Solo será un filtro de un input text.
 //* Todavía no se va implementar roles y permisos, por ahora todos podrán crear propiedades (validaciones y restricciones de roles).
-// Se va a validar que no puedan ver (todas las propiedades) o editar propiedades de otros.
+// Seguir trabajando en el show para público general, para no mostrar teléfonos y traerlo con captcha
+// Listar propiedades para los owner y poder editar el estatus
 

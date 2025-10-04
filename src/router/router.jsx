@@ -4,13 +4,14 @@ import { DefaultLayout } from "../layouts/DefaultLayout";
 import { Home } from "../views/Home";
 import { Login } from "../auth/views/Login";
 import { AuthCallback } from "../auth/views/AuthCallback";
-import { Property } from "../properties/components/create/Property";
-import { PropertyCreateStepOne } from "../properties/components/create/PropertyCreateStepOne";
-import { PropertyCreateStepTwo } from "../properties/components/create/PropertyCreateStepTwo";
-import { PropertyCreateStepThree } from "../properties/components/create/PropertyCreateStepThree";
-import { PropertyCreateStepFour } from "../properties/components/create/PropertyCreateStepFour";
+import { Property } from "../properties/views/create/Property";
+import { PropertyCreateStepOne } from "../properties/views/create/PropertyCreateStepOne";
+import { PropertyCreateStepTwo } from "../properties/views/create/PropertyCreateStepTwo";
+import { PropertyCreateStepThree } from "../properties/views/create/PropertyCreateStepThree";
+import { PropertyCreateStepFour } from "../properties/views/create/PropertyCreateStepFour";
 import { GuestLayout } from "../layouts/GuestLayout";
 import { GeneralLayout } from "../layouts/GeneralLayout";
+import { PropertyShow } from "../properties/views/show/PropertyShow";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: '/property/show/:propertyId',
+        element: <PropertyShow />
       },
     ]
   },

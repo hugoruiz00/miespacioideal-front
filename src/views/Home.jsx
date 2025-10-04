@@ -10,11 +10,14 @@ import { TbHomeSearch } from "react-icons/tb";
 import { LoadingCenter } from "../components/LoadingCenter";
 import { Pagination } from "../components/Pagination";
 import { API_URL } from "../constants/constants";
+import { useNavigate } from "react-router-dom";
 
 const getServiceTypeNames = (serviceTypes) => {
   if(!serviceTypes) return "";
 
-  return serviceTypes.reduce((names, item) => names + item.name, "");                        
+  let services =  serviceTypes.reduce((names, item) => names + item.name + ", ", "");
+  services = services.substring(0, services.length - 2);
+  return services;
 }
 
 const getFirstImage = (images) => {
@@ -26,6 +29,7 @@ const getFirstImage = (images) => {
 export const Home = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {properties, paginationData, loading, error} = useSelector(state => state.properties);
   const [searchText, setSearchText] = useState('');
 
@@ -91,11 +95,13 @@ export const Home = () => {
                 properties.map(property => (                  
                   <div key={property.id}>
                       <div className="bg-white shadow-md rounded-md my-2 mx-2">
-                          <img
-                            className="rounded-md w-full h-48 object-cover"
-                            src={`${API_URL}${getFirstImage(property.images)}`}
-                            alt={property.property_type?.name} />
-                          <div className="p-3">
+                          {/* Card Body */}
+                          <div className="cursor-pointer" onClick={() => navigate(`/property/show/${property.id}`)}>
+                            <img
+                              className="rounded-md w-full h-48 object-cover"
+                              src={`${API_URL}${getFirstImage(property.images)}`}
+                              alt={property.property_type?.name} />
+                            <div className="p-3">
                               <p>{property.property_type?.name} en {getServiceTypeNames(property.service_types)}</p>
                               <p className="text-[#5F5F5F]">{property['address']}</p>
                               <p><span className="font-medium">${property.price}</span> {property.payment_frequency?.frequency}</p>
@@ -115,22 +121,26 @@ export const Home = () => {
                                       </div>
                                     )
                                   })
-                                }                                  
+                                }
                               </div>
-                              <hr className="my-2" />
-                              <div className="flex items-center justify-between">
-                                  <button title="Guardar">
-                                      <FaRegBookmark className='h-5 w-5'/>
-                                  </button>
-                                  <PrimaryButton
-                                    type={'submit'}
-                                    className="h-7"
-                                    title="Ver número de contacto"
-                                  >
-                                    <FaPhoneAlt  className='h-3 w-3 mr-1' />
-                                    Contacto
-                                  </PrimaryButton>
-                              </div>
+                            </div>
+                          </div>
+                          {/* Card Footer */}
+                          <div className="p-3">
+                            <hr className="my-2" />
+                            <div className="flex items-center justify-between">
+                              <button title="Guardar">
+                                <FaRegBookmark className='h-5 w-5'/>
+                              </button>
+                              <PrimaryButton
+                                type={'submit'}
+                                className="h-7"
+                                title="Ver número de contacto"
+                              >
+                                <FaPhoneAlt  className='h-3 w-3 mr-1' />
+                                Contacto
+                              </PrimaryButton>
+                            </div>
                           </div>
                       </div>
                   </div>
